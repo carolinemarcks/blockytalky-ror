@@ -1,0 +1,19 @@
+<% provide(:title, "New User") %>
+<h1>Create New User</h1>
+
+<div class="row-fluid">
+    <div class="span6 offset3">
+        <%= form_tag("/usercreate", method: "post") do %>
+            <%= label_tag(:un, "Desired Username:") %>
+            <%= text_field_tag(:un) %>
+            
+            <%= label_tag(:pw, "Password:") %>
+            <%= password_field_tag(:pw) %>
+            
+            <%= label_tag(:pwc, "Confirm Password:") %>
+            <%= password_field_tag(:pwc) %>
+            <br/>
+            <%= submit_tag("Create User Account") %>
+        <% end %>
+    </div>
+</div>
