@@ -1,0 +1,17 @@
+walk through code in send.py
+walk through code in recieve.rb
+
+run "ruby -rubygems receive.rb" 
+    -- waits for message
+run "python send.py" 
+    -- (run in another terminal since recieve is hanging)
+    -- sends off message, recieve immediately recognizes it and terminates!
+
+
+BUT WAIT
+what if you run the send.py first?
+
+run "python send.py" 
+    -- immediately terminates.  where did the message go? 
+run "ruby -rubygems receive.rb" 
+    -- registers message and terminates!  Rabbit held on to the message for us!
