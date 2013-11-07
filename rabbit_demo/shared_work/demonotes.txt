@@ -1,0 +1,22 @@
+walk briefly through code sets:
+    send_work.rb sends a message from command line to queue
+    worker.rb subscribes and works (sleeps) the number of seconds in the message (or 0 if not a number)
+
+
+run two instances of worker.rb (both waiting) -- both will be used for all demos
+
+demo 1:
+    send 1 second of work , twice
+        -- watch each worker do one second of work
+
+demo 2 (talk about prefetching):
+    you can set the number of messages that a consumer can recieve before they "ack" all their other work
+    if you don't set this number, every nth message goes to the nth consumer:
+        DEMO send 10, send 1, send 10 : watch 1st worker take both 10 second jobs
+    uncomment out prefetch line in worker.rb
+        DEMO send 10, send 1, send 10 : 1st worker takes 10 second job, 2nd worker takes the two others
+
+demo 3 (durability and acking)
+    durability means messages hang around in the server even if consumers all die
+    what happens if a consumer dies in the middle of work?
+        DEMO send 10, then ctrl-c worker that receives it before completion -- watch 2nd worker take over job
