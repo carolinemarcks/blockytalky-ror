@@ -1,6 +1,10 @@
 class LoginController < ApplicationController
-  def index
+  def index #GET
   end
-  def create
+  def create #POST
+    username = params[:un]
+    password = params[:pw]
+    Rails.logger.debug params.inspect
+    redirect_to(root_path) 
   end
 end
