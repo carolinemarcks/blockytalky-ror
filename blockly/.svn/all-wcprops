@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 24
+/svn/!svn/ver/1521/trunk
+END
+python_compressed.js
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/1490/trunk/python_compressed.js
+END
+blockly_uncompressed.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/1490/trunk/blockly_uncompressed.js
+END
+javascript_compressed.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/1490/trunk/javascript_compressed.js
+END
+build.py
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/1410/trunk/build.py
+END
+COPYING
+K 25
+svn:wc:ra_dav:version-url
+V 29
+/svn/!svn/ver/2/trunk/COPYING
+END
+codereview.settings
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/687/trunk/codereview.settings
+END
+blocks_compressed.js
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/1490/trunk/blocks_compressed.js
+END
+blockly_compressed.js
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/1519/trunk/blockly_compressed.js
+END
