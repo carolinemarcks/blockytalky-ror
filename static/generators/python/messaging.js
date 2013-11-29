@@ -2,18 +2,34 @@
 
 if(!Blockly.Language) Blockly.Language= {};
 
-Blockly.Language.facebook_holla = {
-    category: 'Facebook',
+Blockly.Language.twitter_tweet = {
+    category: 'Twitter',
+    helpUrl: '',
+    init: function() {
+    this.setColour(400);
+    var variable = new Blockly.FieldVariable('me');
+    this.appendDummyInput("")
+        .appendTitle("Tweet from ")
+        .appendTitle(variable,'VAR');
+    this.setOutput(true,'Boolean');
+        this.setInputsInline(true);
+    this.setPreviousStatement(false);
+    this.setNextStatement(false);
+    this.setTooltip('Someone Tweets');
+    }
+};
+Blockly.Language.twitter_retweet = {
+    category: 'Twitter',
     helpUrl: '',
     init: function() {
     this.setColour(400);
     this.appendDummyInput("")
-        .appendTitle("Facebook Holla")
-    this.setOutput(true,'String');
+        .appendTitle("Retweet")
+    this.setOutput(true,'Boolean');
         this.setInputsInline(true);
     this.setPreviousStatement(false);
     this.setNextStatement(false);
-    this.setTooltip('get facebook holla');
+    this.setTooltip('Someone Retweets me');
     }
 };
 
@@ -153,8 +169,9 @@ Blockly.Python.facebook_msg= function() {
     return code;
 };
 
-Blockly.Python.facebook_holla= function() {
-    var code = 'facebook holla code'+'\n';
+Blockly.Python.twitter_tweet= function() {
+    var target = this.getTitleValue('VAR');
+    var code = 'tweet from ' +target+'\n';
     return code;
 };
 
