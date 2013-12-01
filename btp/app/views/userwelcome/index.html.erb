@@ -1,27 +1,26 @@
 <% content_for :head do %>
-  <%= javascript_include_tag params[:controller] %>
-  <script type="text/javascript">
-    function doBlocklyStuffsNao(){
-    var toolbox = '<xml>';
-    toolbox += '  <block type="controls_if"></block>';
-    toolbox += '  <block type="controls_whileUntil"></block>';
-    toolbox += '</xml>';
-    Blockly.inject(document.getElementById('blocklyDiv'),
-        //{path: '<%=Rails.root%>/vendor/blockly', toolbox: toolbox});
-        {path: '/blockly/', toolbox: toolbox});
-    }
-//$(document).ready(doBlocklyStuffsNao);
-      </script>
+    <%= javascript_include_tag params[:controller] %>
+    <!-- Initialization code for blockly -->
+    <script type="text/javascript">
+        function doBlocklyInitialize(){
+            var toolbox = '<xml>';
+            toolbox += '  <block type="controls_if"></block>';
+            toolbox += '  <block type="controls_whileUntil"></block>';
+            toolbox += '</xml>';
+            Blockly.inject(document.getElementById('blocklyDiv'),
+                           {path: '/blockly/', toolbox: toolbox});
+        }
+    </script>
 <% end %>
 
 <div class="row-fluid">
-    <div class="span9 offset3">
-        <img src="/assets/btlogo.png"/>
+    <div class="span5 offset4">
+        <img src="/assets/btlogotext.png"/>
     </div>
 </div>
 <div class="row-fluid">
     <div class="span7 offset5">
-        <h2>Welcome, User!</h2>
+        <h2>Welcome, <%= current_user.name %>!</h2>
     </div>
 </div>
 <div class="row-fluid">
@@ -34,7 +33,7 @@
                 <a href="#tabbtu" data-toggle="tab">BTU Management</a>
             </li>
             <li>
-                <a href="#tabcode" onclick="doBlocklyStuffsNao()" data-toggle="tab">Code</a>
+                <a href="#tabcode" onclick="doBlocklyInitialize()" data-toggle="tab">Code</a>
             </li>
             <li>
                 <a href="#tabprofile" data-toggle="tab">Profile</a>
@@ -53,18 +52,32 @@
                 <p> This is where your BTU business will be! </p>
             </div>
             <div class="tab-pane" id="tabprofile">
-                <p> bootstrap is way too ez </p>
+                <p> Account Information </p>
+                <p> User Name:     <%= current_user.name %> </p>
+                <p> Account Email: <%= current_user.email %> </p>
+                <p> School:        <%= current_user.school %> </p>
+                <%= link_to 'Update Profile', edit_user_registration_path %>
             </div>
             <div class="tab-pane" id="tabcode">
-                <p>Code here :) &nbsp;&nbsp;&nbsp;
+                <p>Here, you can create custom programs to use with your Blocky Talkies!</p> 
+                <i>
+                <p>Some Tips:</p>
+                <p>1. Drag individual blocks off the left side to delete them</p>
+                </i>
+                <div class="row-fluid">
+                    <div class="span2">
                     <button type="button" class="btn btn-primary"
-                            onclick="exportCode()">Export to XML!</button>
-                </p>
-                <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
-                    <!--script type="text/javascript">
-                      document.write(codepage.start({}, null,
-                          {langSrc: BlocklyApps.LANGUAGES['en'][2]}));
-                    </script-->
+                            onclick="exportCode()">Export to XML!
+                    </button>
+                    </div>
+                    <div class="span2 offset5">
+                    <button type="button" class="btn btn-danger"
+                            onclick="clearCode()">Clear Blocks
+                    </button>
+                    </div>
+                </div>
+                <br />
+                <div id="blocklyDiv" style="height: 350px; width: 800px;"></div>
             </div>
         </div>
     </div>
