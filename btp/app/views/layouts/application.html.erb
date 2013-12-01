@@ -8,6 +8,17 @@
   <%= yield :head%>
 </head>
 <body>
+<p class="navbar-text pull-right">
+<% if notice %>
+  <p class="alert alert-notice"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-error"><%= alert %></p>
+<% end %>
+
+<div id="secondaryContent">
+    <%= render 'common/session' %>
+</div>
 
 <%= yield %>
 

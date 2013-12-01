@@ -1,11 +1,16 @@
 Btp::Application.routes.draw do
   devise_for :users
 
+    resources :userwelcome
+
+    authenticated :user do
+        root :to => "userwelcome#index"
+    end
+
+    root :to => redirect("/users/sign_in")
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-  resources :login
-  resources :usercreate
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
@@ -46,7 +51,6 @@ Btp::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'userwelcome#index'
 
   # See how all your routes lay out with "rake routes"
 
