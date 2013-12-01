@@ -6,7 +6,7 @@
 @exportCode = ->
     xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     xml_text = Blockly.Xml.domToText(xml);
-    xml_text = "Copy / Save this code for later use and loading into Blockly!<br/>" + xml_text
+    xml_text = "Copy / Save this code for later use and loading into Blockly!\n" + xml_text
     alert xml_text
 
 @clearCode = ->
