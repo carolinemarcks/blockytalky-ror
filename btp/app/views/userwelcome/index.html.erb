@@ -1,6 +1,17 @@
-i<% content_for :head do %>
-  <%= javascript_include_tag "userwelcome.js" %>
-  <!--HAI DER-->
+<% content_for :head do %>
+  <%= javascript_include_tag params[:controller] %>
+  <script type="text/javascript">
+    function doBlocklyStuffsNao(){
+    var toolbox = '<xml>';
+    toolbox += '  <block type="controls_if"></block>';
+    toolbox += '  <block type="controls_whileUntil"></block>';
+    toolbox += '</xml>';
+    Blockly.inject(document.getElementById('blocklyDiv'),
+        //{path: '<%=Rails.root%>/vendor/blockly', toolbox: toolbox});
+        {path: '/blockly/', toolbox: toolbox});
+    }
+//$(document).ready(doBlocklyStuffsNao);
+      </script>
 <% end %>
 
 <div class="row-fluid">
@@ -23,7 +34,7 @@ i<% content_for :head do %>
                 <a href="#tabbtu" data-toggle="tab">BTU Management</a>
             </li>
             <li>
-                <a href="#tabcode" data-toggle="tab">Code</a>
+                <a href="#tabcode" onclick="doBlocklyStuffsNao()" data-toggle="tab">Code</a>
             </li>
             <li>
                 <a href="#tabprofile" data-toggle="tab">Profile</a>
@@ -49,7 +60,11 @@ i<% content_for :head do %>
                     <button type="button" class="btn btn-primary"
                             onclick="exportCode()">Export to XML!</button>
                 </p>
-                <div id="blocklyPane"></div>
+                <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+                    <!--script type="text/javascript">
+                      document.write(codepage.start({}, null,
+                          {langSrc: BlocklyApps.LANGUAGES['en'][2]}));
+                    </script-->
             </div>
         </div>
     </div>

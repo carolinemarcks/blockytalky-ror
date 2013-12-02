@@ -13,3 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree ./site_wide_js
+//= require blockly
