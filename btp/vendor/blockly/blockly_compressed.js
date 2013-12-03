@@ -983,3 +983,272 @@ Blockly.getMainWorkspaceMetrics_=function(){var a=Blockly.svgSize();a.width-=Blo
 viewWidth:a.width,contentHeight:c-g,contentWidth:b-f,viewTop:-Blockly.mainWorkspace.scrollY,viewLeft:-Blockly.mainWorkspace.scrollX,contentTop:g,contentLeft:f,absoluteTop:0,absoluteLeft:Blockly.RTL?0:Blockly.Toolbox.width}};
 Blockly.setMainWorkspaceMetrics_=function(a){if(!Blockly.mainWorkspace.scrollbar)throw"Attempt to set main workspace scroll without scrollbars.";var b=Blockly.getMainWorkspaceMetrics_();goog.isNumber(a.x)&&(Blockly.mainWorkspace.scrollX=-b.contentWidth*a.x-b.contentLeft);goog.isNumber(a.y)&&(Blockly.mainWorkspace.scrollY=-b.contentHeight*a.y-b.contentTop);a="translate("+(Blockly.mainWorkspace.scrollX+b.absoluteLeft)+","+(Blockly.mainWorkspace.scrollY+b.absoluteTop)+")";Blockly.mainWorkspace.getCanvas().setAttribute("transform",
 a);Blockly.mainWorkspace.getBubbleCanvas().setAttribute("transform",a)};Blockly.addChangeListener=function(a){return Blockly.bindEvent_(Blockly.mainWorkspace.getCanvas(),"blocklyWorkspaceChange",null,a)};Blockly.removeChangeListener=function(a){Blockly.unbindEvent_(a)};Blockly.getMainWorkspace=function(){return Blockly.mainWorkspace};window.Blockly=Blockly;Blockly.getMainWorkspace=Blockly.getMainWorkspace;Blockly.addChangeListener=Blockly.addChangeListener;Blockly.removeChangeListener=Blockly.removeChangeListener;
+
+
+Blockly.Blocks.sensor_touch={
+    category:"Sensors",
+    helpUrl:"",
+    init:function() {
+    this.setColour(50);
+    this.appendDummyInput("")
+        .appendTitle("Touch Sensor:");
+    this.appendDummyInput("")
+        .appendTitle("Port")
+        .appendTitle(new Blockly.FieldDropdown([["1","1"],["2","2"],
+            ["3","3"],["4","4"]]),"port");
+    this.appendDummyInput("")
+        .appendTitle(new Blockly.FieldDropdown([["is pressed","1"],["is released","0"]]),"status");
+    this.setInputsInline(true);
+    this.setOutput(true, 'Boolean');
+    this.setPreviousStatement(false);
+    this.setNextStatement(false);
+    this.setTooltip("Returns the status of a touch sensor");
+    }
+};
+
+Blockly.Blocks.sensor_light={
+    category:"Sensors",
+    helpUrl:"",
+    init:function() {
+    this.setColour(50);
+    this.appendDummyInput("")
+        .appendTitle("Light Sensor:");
+    this.appendDummyInput("")
+        .appendTitle("Port")
+        .appendTitle(new Blockly.FieldDropdown([["1","1"],["2","2"],
+            ["3","3"],["4","4"]]),"port");
+    this.setInputsInline(!0);
+    this.setOutput(!0,"Number");
+    this.setTooltip("Returns the value of a light sensor");
+    }
+};
+
+Blockly.Blocks.sensor_ultrasonic={
+    category:"Sensors",
+    helpUrl:"",
+    init:function() {
+    this.setColour(50);
+    this.appendDummyInput("")
+        .appendTitle("Ultrasonic Sensor:");
+    this.appendDummyInput("")
+        .appendTitle("Port")
+        .appendTitle(new Blockly.FieldDropdown([["1","1"],["2","2"],
+            ["3","3"],["4","4"]]),"port");
+    this.setInputsInline(!0);
+    this.setOutput(!0,"Number");
+    this.setTooltip("Returns the value of an ultrasonic sensor");
+    }
+};
+
+Blockly.Blocks.sensor_sound={
+    category:"Sensors",
+    helpUrl:"",
+    init:function() {
+    this.setColour(50);
+    this.appendDummyInput("")
+        .appendTitle("Sound Sensor:");
+    this.appendDummyInput("")
+        .appendTitle("Port")
+        .appendTitle(new Blockly.FieldDropdown([["1","1"],["2","2"],
+            ["3","3"],["4","4"]]),"port");
+    this.setInputsInline(!0);
+    this.setOutput(!0,"Number");
+    this.setTooltip("Returns the value of a sound sensor");
+    }
+};
+
+
+Blockly.Blocks.motor_set= {
+    category: 'Motors',
+    helpUrl: 'http://www.google.com',
+    init: function() {
+    this.setColour(300);
+    this.appendDummyInput("")
+        .appendTitle("Set motor")
+            .appendTitle(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], 
+                ["3","3"],["4","4"],["All","All"]]), 'motor_num');
+      /*this.appendDummyInput()
+        .appendTitle(' MotorPower')
+            .appendTitle(new Blockly.FieldTextInput('100',
+            Blockly.Blocks.math_number.validator), 'motor_power');*/
+    this.appendDummyInput("")
+            .appendTitle(" to power");
+    this.appendValueInput('motor_power')
+            .setCheck('Number');
+    this.setInputsInline(true);
+    this.setOutput(false);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('Motor 1-4, Power -100 to 100');
+    }
+};
+
+Blockly.Blocks.motor_get_encoder= {
+    category: 'Motors',
+    helpUrl: '',
+    init: function() {
+    this.setColour(300);
+    this.appendDummyInput("")
+        .appendTitle("Encoder Value");
+    this.appendDummyInput("")
+        .appendTitle("Motor")
+            .appendTitle(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3","3"], ["4","4"]]), 'enc');
+    this.setInputsInline(true);
+    this.setOutput(true,'Number');
+    this.setTooltip('Returns absolute rotation of specified motor');
+    }
+};
+
+Blockly.Blocks.motor_get_encoder= {
+    category: 'Motors',
+    helpUrl: '',
+    init: function() {
+    this.setColour(300);
+    this.appendDummyInput("")
+        .appendTitle("Encoder Value");
+    this.appendDummyInput("")
+        .appendTitle("Motor")
+            .appendTitle(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["3","3"], ["4","4"]]), 'enc');
+    this.setInputsInline(true);
+    this.setOutput(true,'Number');
+    this.setTooltip('Returns absolute rotation of specified motor');
+    }
+};
+
+Blockly.Blocks.pin_in= {
+    category: 'GPIO',
+    helpUrl: '',
+    init: function() {
+    this.setColour(0);
+    this.appendDummyInput("")
+        .appendTitle("GPIO In Pin:")
+        .appendTitle(new Blockly.FieldDropdown([["12", "12"], ["16", "16"],
+                            ["18", "18"],["22", "22"]]), 'gpio_in_pin');
+    this.appendDummyInput("")
+        .appendTitle("Value:")
+            .appendTitle(new Blockly.FieldDropdown([["HIGH", "1"], ["LOW", "0"]]), 'gpio_in_value');
+    this.setInputsInline(true);
+    this.setOutput(false);
+    this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+Blockly.Blocks.pin_out= {
+    category: 'GPIO',
+    helpUrl: '',
+    init: function() {
+    this.setColour(0);
+    this.appendDummyInput("")
+        .appendTitle("GPIO Out Pin:")
+        .appendTitle(new Blockly.FieldDropdown([["7", "7"], ["11", "11"],
+                            ["13","13"],["15","15"]]), 'gpio_out_pin');
+    this.appendDummyInput("")
+        .appendTitle("Value:")
+            .appendTitle(new Blockly.FieldDropdown([["HIGH", "1"], ["LOW", "0"]]), 'gpio_out_value');
+    this.setInputsInline(true);
+    this.setOutput(false);
+    this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+
+Blockly.Blocks.sensor_new_val= {
+    category: 'Sensors',
+    helpUrl: '',
+    init: function() {
+    this.setColour(300)
+    this.appendDummyInput("")
+        .appendTitle("Unread Data On:");
+    this.appendDummyInput("")
+        .appendTitle(new Blockly.FieldDropdown([["Sensor 1", "sensor1"], 
+                            ["Sensor 2", "sensor2"],
+                                                    ["Sensor 3", "sensor3"],
+                            ["Sensor 4", "sensor4"],
+                            ["Sensor 5", "sensor5"],
+                            ["Encoder 1", "encoder1"],
+                            ["Encoder 2", "encoder2"],
+                            ["Encoder 3", "encoder3"],
+                            ["Encoder 4", "encoder4"]]
+                          ), 'port');
+    this.setInputsInline(true);
+    this.setOutput(true, 'Boolean');
+    this.setTooltip('Returns true if there is unread data on the specified port');
+    }
+
+}
+
+Blockly.Blocks.led_set= {
+category: 'LED',
+  helpUrl: '',
+  init: function() {
+    this.setColour(300);
+    this.appendDummyInput("")
+    .appendTitle("Set LEDs:");
+    this.appendDummyInput("")
+    .appendTitle("LED1")
+        .appendTitle(new Blockly.FieldDropdown([["On", "On"], ["Off", "Off"]]), 'led1');
+    this.appendDummyInput("")
+    .appendTitle("LED2")
+        .appendTitle(new Blockly.FieldDropdown([["On", "On"], ["Off", "Off"]]), 'led2');
+    this.setInputsInline(true);
+    this.setOutput(false);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('Set LEDs to on or off');
+  }
+};
+
+
+Blockly.Blocks.time_sleep= {
+category: 'Time',
+  helpUrl: '',
+  init: function() {
+    this.setColour(300);
+    this.appendDummyInput("")
+        .appendTitle('Wait for')
+        .appendTitle(new Blockly.FieldTextInput('1000',
+          Blockly.Blocks.math_number.validator), 'time_sleep');
+    this.appendDummyInput("")
+    .appendTitle('ms');
+    this.setInputsInline(true);
+    this.setOutput(false);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('Pause for ___ milliseconds');
+  }
+};
+
+Blockly.Blocks.print_print= {
+category: 'Print',
+  helpUrl: '',
+  init: function() {
+    this.setColour(300);
+    this.appendDummyInput("")
+          .appendTitle("Print: ");
+    this.appendValueInput('to_print')
+    this.setInputsInline(true);
+    this.setOutput(false);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('Prints to terminal on Pi');
+  }
+};
+
+
+Blockly.Blocks.controls_inf_loop = {
+  //Infinite loop.                                                              
+    helpUrl: '',
+    init: function() {
+        this.setColour(120);
+        this.appendDummyInput("")
+            .appendTitle('repeat forever');
+        this.appendStatementInput('DO')
+            .appendTitle(Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+    }
+};
+
+

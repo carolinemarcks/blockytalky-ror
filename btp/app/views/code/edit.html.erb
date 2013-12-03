@@ -2,10 +2,8 @@
     <%= javascript_include_tag params[:controller] %>
     <!-- Initialization code for blockly -->
     <script type="text/javascript">
-        var hasInit = false; 
+      
       function doBlocklyInitialize(){
-            if(hasInit){return;}
-            hasInit = true;
             var toolbox = '<xml>';
             toolbox += '  <block type="controls_if"></block>';
             toolbox += '  <block type="controls_whileUntil"></block>';
@@ -31,20 +29,13 @@
 </category>
 <category name="Custom">
 <block type="start"></block>
-<category name="Sensors">
-<block type="sensor_touch"></block>
-<block type="sensor_light"></block>
-<block type="sensor_ultrasonic"></block>
-<block type="sensor_sound"></block>
-<block type="sensor_new_val"></block>
+<category name="Move">
+<block type="move_forward"></block>
+<block type="move_backward"></block>
 </category>
-<category name="Motors">
-<block type="motor_set"></block>
-<block type="motor_get_encoder"></block>
-</category>
-<category name="Pins">
-<block type="pin_in"></block>
-<block type="pin_out"></block>
+<category name="Turn">
+<block type="turn_left"></block>
+<block type="turn_right"></block>
 </category>
 </category>
 </category>
@@ -55,24 +46,10 @@
     </div>
 </div>
 <div class="row-fluid">
-    <div class="span7 offset5">
-        <h2>Welcome, <%= current_user.name %>!</h2>
-    </div>
-</div>
-<div class="row-fluid">
     <div class="span6 offset2">
         <ul class="nav nav-pills">
             <li class="active">
-                <a href="#tabhome" data-toggle="tab">Home</a>
-            </li>
-            <li>
-                <a href="#tabbtu" data-toggle="tab">BTU Management</a>
-            </li>
-            <li>
                 <a href="#tabcode" onclick="doBlocklyInitialize()" data-toggle="tab">Code</a>
-            </li>
-            <li>
-                <a href="#tabprofile" data-toggle="tab">Profile</a>
             </li>
         </ul>
     </div>
@@ -81,27 +58,42 @@
 <div class="row-fluid">
     <div class="span10 offset2">
         <div class="tab-content">
-            <div class="tab-pane active" id="tabhome">
-                <p>This is your home page!<p>
-            </div>
-            <div class="tab-pane" id="tabbtu">
-                <p> This is where your BTU business will be! </p>
-            </div>
-            <div class="tab-pane" id="tabprofile">
-                <p> Account Information </p>
-                <p> User Name:     <%= current_user.name %> </p>
-                <p> Account Email: <%= current_user.email %> </p>
-                <p> School:        <%= current_user.school %> </p>
-                <%= link_to 'Update Profile', edit_user_registration_path %>
-            </div>
             <div class="tab-pane" id="tabcode">
                 <p>Here, you can create custom programs to use with your Blocky Talkies!</p> 
+                <i>
+                <p>Some Tips:</p>
+                <p>1. Drag individual blocks off the left side to delete them</p>
+                </i>
                 <div class="row-fluid">
                     <div class="span2">
                     <button type="button" class="btn btn-primary"
                             onclick="exportCode()">Export to XML!
                     </button>
                     </div>
+<%= form_for :code, url: code_path(@code), method: :patch do |f| %>
+  <% if @code.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@code.errors.count, "error") %> prohibited
+      this code from being saved:</h2>
+    <ul>
+    <% @code.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <p>
+    <%= f.label :codetext %><br>
+    <%= f.text_area :codetext %>
+  </p>
+ 
+  <button class="button button-primary">
+    <%= f.submit %>
+  </button>
+<% end %>
+ 
+
+                    
                     <div class="span2 offset5">
                     <button type="button" class="btn btn-danger"
                             onclick="clearCode()">Clear Blocks
