@@ -2,17 +2,44 @@
     <%= javascript_include_tag params[:controller] %>
     <!-- Initialization code for blockly -->
     <script type="text/javascript">
-        function doBlocklyInitialize(){
+      
+      function doBlocklyInitialize(){
             var toolbox = '<xml>';
             toolbox += '  <block type="controls_if"></block>';
             toolbox += '  <block type="controls_whileUntil"></block>';
-            toolbox += '</xml>';
             Blockly.inject(document.getElementById('blocklyDiv'),
-                           {path: '/blockly/', toolbox: toolbox});
+                           {path: '/blockly/', toolbox: document.getElementById('toolbox')});
+            // Ugly stuff that needs to be replaced in the future
+            document.getElementById('blocklyDiv').children[0].style = 'display: block; height: 351px;';
         }
     </script>
 <% end %>
-
+<xml id="toolbox" style="display: none">
+<category name="Start">
+<category name="Core">
+<category name="Control">
+<block type="controls_if"></block>
+<block type="controls_whileUntil"></block>
+</category>
+<category name="Logic">
+<block type="logic_compare"></block>
+<block type="logic_operation"></block>
+<block type="logic_boolean"></block>
+</category>
+</category>
+<category name="Custom">
+<block type="start"></block>
+<category name="Move">
+<block type="move_forward"></block>
+<block type="move_backward"></block>
+</category>
+<category name="Turn">
+<block type="turn_left"></block>
+<block type="turn_right"></block>
+</category>
+</category>
+</category>
+</xml>
 <div class="row-fluid">
     <div class="span5 offset4">
         <img src="/assets/btlogotext.png"/>
