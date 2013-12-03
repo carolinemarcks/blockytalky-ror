@@ -115,3 +115,167 @@ Blockly.Python['procedures_ifreturn'] = function(block) {
   }
   return code;
 };
+
+//DEFINE GENERATORS:
+
+Blockly.Python= Blockly.Generator.get('Python');
+
+Blockly.Python.motor_set = function() {
+    //var value_motor_number = Blockly.Python.valueToCode(this, 'motor_num', Blockly.Python.ORDER_ATOMIC);
+    var value_motor_power = Blockly.Python.valueToCode(this, 'motor_power', Blockly.Python.ORDER_NONE);
+    var code;
+    var value_motor_number= this.getTitleValue('motor_num');
+    //var value_motor_power = parseInt(this.getTitleValue('motor_power'));
+    if(value_motor_number=="All") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(motor1=' +value_motor_power+ ', motor2=' + value_motor_power + ', motor3=' + value_motor_power + '))'+'\n'
+    }
+    else if(value_motor_number=="1") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(motor1=' +value_motor_power+ '))'+'\n'
+    }
+    else if(value_motor_number=="2") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(motor2=' +value_motor_power+ '))'+'\n'
+    }
+    else if(value_motor_number=="3") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(motor3=' +value_motor_power+ '))'+'\n'
+    }
+    else if(value_motor_number=="4") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(motor4=' +value_motor_power+ '))'+'\n'
+    }
+    code = code + 'toSend = Message.encode(toSend)' + '\n'
+    code= code + 'channel.basic_publish(exchange="", routing_key="HwCmd", body=toSend)'+'\n'+'time.sleep(.01)'+'\n'
+    return code;
+};
+
+Blockly.Python.pin_in = function() {
+    var value_pin_value = Blockly.Python.valueToCode(this, 'gpio_in_value', Blockly.Python.ORDER_NONE);
+    var pin_value;
+    
+    pin_value= this.getTitleValue('gpio_in_value');
+
+    var code;
+    var value_pin_number= this.getTitleValue('gpio_in_pin');
+    if(value_pin_number=="12") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(pin12=' +pin_value+ '))'+'\n'
+    }
+    else if(value_pin_number=="16") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(pin16=' +pin_value+ '))'+'\n'
+    }
+    else if(value_pin_number=="18") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(pin18=' +pin_value+ '))'+'\n'
+    }
+    else if(value_pin_number=="22") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(pin22=' +pin_value+ '))'+'\n'
+    }
+    code = code + 'toSend = Message.encode(toSend)' + '\n'
+    code= code + 'channel.basic_publish(exchange="", routing_key="HwCmd", body=toSend)'+'\n'+'time.sleep(.01)'+'\n'
+    return code;
+};
+
+Blockly.Python.pin_out = function() {
+    var value_pin_value = Blockly.Python.valueToCode(this, 'gpio_out_value', Blockly.Python.ORDER_NONE);
+    var pin_value;
+    
+    pin_value= this.getTitleValue('gpio_out_value');
+
+    var code;
+    var value_pin_number= this.getTitleValue('gpio_out_pin');    
+    if(value_pin_number=="7") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(pin7=' +pin_value+ '))'+'\n'
+    }
+    else if(value_pin_number=="11") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(pin11=' +pin_value+ '))'+'\n'
+    }
+    else if(value_pin_number=="13") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(pin13=' +pin_value+ '))'+'\n'
+    }
+    else if(value_pin_number=="15") {
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(pin15=' +pin_value+ '))'+'\n'
+    }
+    code = code + 'toSend = Message.encode(toSend)' + '\n'
+    code= code + 'channel.basic_publish(exchange="", routing_key="HwCmd", body=toSend)'+'\n'+'time.sleep(.01)'+'\n'
+    return code;
+};
+
+Blockly.Python.motor_all_stop= function() {
+    var code= 'toSend= Message(self.hostname, None, "HwCmd", Message.createImage(motor1=0, motor2=0, motor3=0))'+'\n' + 'Message.encode(toSend)' + '\n' + 'channel.basic_publish(exchange="", routing_key="HwCmd", body=toSend)'+'\n'+'time.sleep(.01)'+'\n';
+    return code;
+};
+
+Blockly.Python.motor_get_encoder= function() {
+    var value_encoder= this.getTitleValue('enc');
+    value_encoder-=1;
+    var code = 'self.getSensorValue("encoder", ' + value_encoder + ')';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.sensor_new_val= function() {
+    var port= this.getTitleValue('port');
+    var code= 'self.sensorStatus["'+port+'"]';
+    return [code, Blockly.Python.ORDER_ATOMIC];
+}
+
+Blockly.Python.led_set= function() {
+  var value_led1;
+  var value_led2;
+  if(this.getTitleValue('led1') =="On") {
+    value_led1= 1;
+  }
+  else {
+    value_led1= 0;
+  }
+   if(this.getTitleValue('led2') =="On") {
+    value_led2= 1;
+  }
+  else {
+    value_led2= 0;
+  }
+    code= 'toSend = Message(self.hostname, None, "HwCmd", Message.createImage(led1=' +value_led1+ ', led2=' +value_led2+ '))'+'\n'+'channel.basic_publish(exchange="", routing_key="HwCmd", body=toSend)'+'\n'+'time.sleep(.01)'+'\n';
+  return code;
+};
+
+Blockly.Python.time_sleep= function() {
+  var value_sleep = parseInt(this.getTitleValue('time_sleep'));
+  value_sleep= value_sleep/1000;
+  var code = 'time.sleep('+value_sleep+')'+'\n';
+  return code;
+};
+
+Blockly.Python.print_print= function() {
+   var value_print = Blockly.Python.valueToCode(this, 'to_print', Blockly.Python.ORDER_NONE);
+  var code = 'print '+value_print+'\n';
+  return code;
+};
+
+
+Blockly.Python.controls_inf_loop= function () {
+    var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+    var code= 'while True:'+'\n'+ branch;
+    return code;
+};
+
+Blockly.Python.sensor_touch=function() {
+    var b=this.getTitleValue("port");
+    var a=this.getTitleValue("status");
+    if (a == 1){
+        return['self.robot["sensors"]['+(b-1)+'] < 200',Blockly.Python.ORDER_ATOMIC];}
+    if (a == 0){
+        return['self.robot["sensors"]['+(b-1)+'] > 200',Blockly.Python.ORDER_ATOMIC];}
+};
+
+Blockly.Python.sensor_light=function() {
+    var b=this.getTitleValue("port");;
+
+        return['self.robot["sensors"]['+(b-1)+']',Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.sensor_ultrasonic=function() {
+    var b=this.getTitleValue("port");;
+
+        return['self.robot["sensors"]['+(b-1)+']',Blockly.Python.ORDER_ATOMIC];
+};
+
+Blockly.Python.sensor_sound=function() {
+    var b=this.getTitleValue("port");;
+
+        return['self.robot["sensors"]['+(b-1)+']',Blockly.Python.ORDER_ATOMIC];
+};
