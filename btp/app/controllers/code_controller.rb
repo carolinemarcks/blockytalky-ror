@@ -12,7 +12,8 @@ class CodeController < ApplicationController
     end
     def update
         @code = Code.find(params[:id])
-        if(code.update(params[:code].permit(:codetext)))
+        #if(@code.update(params[:code].permit(:codetext)))
+        if(@code.update_attributes(params[:code], {:codetext => :codetext}))
             redirect_to @code
         end
     end
