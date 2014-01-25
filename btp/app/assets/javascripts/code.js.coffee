@@ -5,6 +5,7 @@
     xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     xml_text = Blockly.Xml.domToText(xml);
     $('#xmlText').html(xml_text);
+    $('#codeForm').submit();
 
 @clearCode = ->
     Blockly.mainWorkspace.clear();

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :isTeacher, :name, :school
+  has_many :codes
 
   # Include the friend model (see https://github.com/raw1z/amistad/wiki)
   include Amistad::FriendModel
