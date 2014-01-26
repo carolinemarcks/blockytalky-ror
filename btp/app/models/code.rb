@@ -4,7 +4,7 @@ class Code < ActiveRecord::Base
 	self.user_id == (user.try(:id) || user)
     end
 
-  # attr_accessible :title, :body
+    attr_accessible :title
     attr_accessible :codetext, :user_id
     belongs_to :user
 end

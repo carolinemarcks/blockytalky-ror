@@ -31,46 +31,54 @@
     </div>
 </div>
 
+<%= form_for :code, url: code_path(@code), :html => { :id => "codeForm"}, method: :update do |f| %>
+    <div class="row-fluid">
+        <p class="span10 offset2">
+            <% if @code.title.nil? %>
+                <%= f.text_field :title, :id =>"codeTitle", :placeholder => "Name Your Program" %>
+            <% else %>
+                <%= f.text_field :title, :id =>"codeTitle", :placeholder => @code.title %>
+            <% end %>
+        </p>
+    </div>
+    <% if @code.errors.any? %>
+        <div class="row-fluid">
+        <div class="span10 offset2">
+            <div id="error_explanation">
+                <h2><%= pluralize(@code.errors.count, "error") %> prohibited
+                this code from being saved:</h2>
+                <ul>
+                <% @code.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+                </ul>
+            </div>
+        </div>
+        </div>
+    <% end %>
+    <span id="codeFormXML">
+        <%= f.text_area :codetext, :class => "span9", :id =>"xmlText" %>
+    </span>
+<% end %>
+
 <div class="row-fluid">
     <div class="span10 offset2">
-                <div class="row-fluid">
-                    <div class="span2">
-                    <button type="button" class="btn btn-primary"
-                            onclick="exportCode()">Save your Code!
-                    </button>
-                    </div>
+        <div id="blocklyDiv" style="height: 350px; width: 800px;"></div>
+        <br />
+        <div class="row-fluid">
+            <div class="span2">
+                <button type="button" class="btn btn-primary"
+                     onclick="exportCode()">Save your Code!
+                </button>
+            </div>
 
-                    <div class="span2 offset5">
-                    <button type="button" class="btn btn-danger"
-                            onclick="clearCode()">Clear Blocks
-                    </button>
-                    </div>
-                </div>
-                <br />
-                <div id="blocklyDiv" style="height: 350px; width: 800px;"></div>
+            <div class="span2 offset5">
+                <button type="button" class="btn btn-danger"
+                    onclick="clearCode()">Clear Blocks
+                </button>
             </div>
         </div>
     </div>
-</div>
-<div class="row-fluid">
-<div class="span10 offset2">
-<%= form_for :code, url: code_path(@code), method: :update, :html => { :id => "codeForm"} do |f| %>
-    <% if @code.errors.any? %>
-        <div id="error_explanation">
-            <h2><%= pluralize(@code.errors.count, "error") %> prohibited
-              this code from being saved:</h2>
-            <ul>
-            <% @code.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-            </ul>
-        </div>
-    <% end %>
-    <p>
-        <%= f.text_area :codetext, :class => "span9", :id =>"xmlText" %>
-    </p>
-<% end %>
-</div>
 </div>
 <script>
     $(document).ready(doBlocklyInitialize())
