@@ -31,6 +31,7 @@
     </div>
 </div>
 
+<%= form_for :code, url: code_path(@code), method: :update, :html => { :id => "codeForm"} do |f| %>
 <div class="row-fluid">
     <div class="span10 offset2">
                 <div class="row-fluid">
@@ -38,12 +39,14 @@
                     <button type="button" class="btn btn-primary"
                             onclick="exportCode()">Save your Code!
                     </button>
+                    <%= f.text_field :title, :value => @code.title %>
                     </div>
 
                     <div class="span2 offset5">
                     <button type="button" class="btn btn-danger"
                             onclick="clearCode()">Clear Blocks
                     </button>
+
                     </div>
                 </div>
                 <br />
@@ -54,7 +57,6 @@
 </div>
 <div class="row-fluid">
 <div class="span10 offset2">
-<%= form_for :code, url: code_path(@code), method: :update, :html => { :id => "codeForm"} do |f| %>
     <% if @code.errors.any? %>
         <div id="error_explanation">
             <h2><%= pluralize(@code.errors.count, "error") %> prohibited
@@ -69,9 +71,9 @@
     <p>
         <%= f.text_area :codetext, :class => "span9", :id =>"xmlText" %>
     </p>
-<% end %>
 </div>
 </div>
+<% end #End form %> 
 <script>
     $(document).ready(doBlocklyInitialize())
 </script>

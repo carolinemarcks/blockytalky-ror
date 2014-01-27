@@ -1,10 +1,11 @@
 class Code < ActiveRecord::Base
 
     def owned_by?(user)
-	self.user_id == (user.try(:id) || user)
+        self.user_id == (user.try(:id) || user)
     end
 
-  # attr_accessible :title, :body
-    attr_accessible :codetext, :user_id
+    attr_accessible :codetext, :user_id, :title
     belongs_to :user
+
+    validates :user_id, presence: true
 end
