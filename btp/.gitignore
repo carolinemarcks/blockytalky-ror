@@ -7,6 +7,7 @@
 *.rbc
 *.sassc
 .sass-cache
+.DS_Store
 capybara-*.html
 .rspec
 /log

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20140126181717) do
+=======
+ActiveRecord::Schema.define(:version => 20140126210042) do
+>>>>>>> cacb890d83e936d75e2fd4817be76706644d6ab4
 
   create_table "codes", :force => true do |t|
     t.datetime "created_at", :null => false
