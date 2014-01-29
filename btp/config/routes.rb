@@ -9,6 +9,5 @@ Btp::Application.routes.draw do
     end
 
     root :to => redirect("/users/sign_in")
-    match '/code/(:id)' => 'code#update', :via => [:post]
     match 'frame2.html', to: 'userwelcome#show_frame'
 end

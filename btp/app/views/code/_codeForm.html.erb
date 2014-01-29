@@ -1,0 +1,28 @@
+<div class="row-fluid">
+    <p class="span10 offset2">
+        <% if @code.title.nil? %>
+            <%= f.text_field :title, :id =>"codeTitle", :placeholder => "Name Your Program" %>
+        <% else %>
+            <%= f.text_field :title, :id =>"codeTitle", :placeholder => @code.title %>
+        <% end %>
+    </p>
+</div>
+<% if @code.errors.any? %>
+    <div class="row-fluid">
+    <div class="span10 offset2">
+        <div id="error_explanation">
+            <h2><%= pluralize(@code.errors.count, "error") %> prohibited
+            this code from being saved:</h2>
+            <ul>
+            <% @code.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+            </ul>
+        </div>
+    </div>
+    </div>
+<% end %>
+<span id="codeFormXML">
+    <%= f.text_area :codetext, :class => "span9", :id =>"xmlText" %>
+</span>
+

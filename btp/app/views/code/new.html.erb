@@ -2,7 +2,7 @@
     <%= render partial: "blocklyInitialization" %>
 <% end %>
 
-<%= form_for @code, :html => { :id => "codeForm"}, method: :put do |f| %>
+<%= form_for :code, url: code_index_path, html: { :id => "codeForm"} do |f| %>
     <%= render partial: "codeForm", locals: {f: f, code: @code} %>
 <% end %>
 
