@@ -13,6 +13,10 @@ class CodeController < ApplicationController
         @code = @user.codes.new
     end
 
+    def index
+        @user = current_user
+    end
+
     def update
         @code = Code.find(params[:id])
         if(@code.update_attributes(params[:code], {:codetext => :codetext, :title => :title}))

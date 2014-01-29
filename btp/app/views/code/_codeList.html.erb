@@ -1,0 +1,29 @@
+<h3><u>View your saved programs and code. Or, make something new!</u></h3> 
+        <%# Display each code that the user owns %>
+        <table id="codeEntryTable" class="table table-striped table-bordered table-nonfluid">
+        <% (0..@user.codes.count).each do |i| %>
+            <% if !@user.codes[i].nil? %>
+                <tr>
+                    <td>
+                        <div id="leftCodeRow">
+                            <a href=<%= "/code/" + @user.codes[i].id.to_s %>>
+                                <% if @user.codes[i].title.blank? %>
+                                    (Unnamed Program)
+                                <% else %>
+                                    <%= @user.codes[i].title %>
+                                <% end %>
+                             </a>
+                        </div>
+                        <div id="rightCodeRow">
+                            <a href=<%= "/code/" + @user.codes[i].id.to_s %> type="button" class="btn btn-info">
+                                Edit
+                            </a>
+                            <%= button_to "Delete", {:controller => :userwelcome, :action => 'destroy', 
+                                :id => @user.codes[i].id }, :class => 'btn btn-danger', :method => :delete %>
+                        </div>
+                    </td>
+                </tr>
+            <% end %>
+        <% end %>
+        </table>
+        <a href="/code/new" type="button" class="btn btn-primary">Create New Code</a>
