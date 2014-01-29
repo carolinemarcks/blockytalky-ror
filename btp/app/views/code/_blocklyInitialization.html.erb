@@ -32,3 +32,24 @@
 </category>
 </xml>
 
+<script type="text/javascript">
+    var hasInit = false; 
+  function doBlocklyInitialize(){
+        if(hasInit){return;}
+        hasInit = true;
+        var toolbox = '<xml>';
+        toolbox += '  <block type="controls_if"></block>';
+        toolbox += '  <block type="controls_whileUntil"></block>';
+        Blockly.inject(document.getElementById('blocklyDiv'),
+                       {path: '/blockly/',scrollbars:false, toolbox: document.getElementById('toolbox')});
+        // Ugly stuff that needs to be replaced in the future
+        document.getElementById('blocklyDiv').children[0].style = 'display: block; height: 351px;';
+        <% if(@code.codetext) %>
+            var code =  <%= ("'" + @code.codetext + "'").html_safe %> ;
+            var xml_text = Blockly.Xml.textToDom(code);
+            //XSS IS A FACTOR NOW AAAAA
+            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml_text);
+        <% end %>
+    }
+    $(document).ready(doBlocklyInitialize);
+</script>

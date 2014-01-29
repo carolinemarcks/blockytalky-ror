@@ -9,7 +9,7 @@ class CodeController < ApplicationController
     end
     def new
         @user = current_user
-        @code = @user.codes.new("")
+        @code = @user.codes.new
         @code.save
         redirect_to @code
     end
