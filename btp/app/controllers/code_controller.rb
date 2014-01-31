@@ -19,7 +19,7 @@ class CodeController < ApplicationController
 
     def update
         @code = Code.find(params[:id])
-        if(@code.update_attributes(params[:code], {:codetext => :codetext, :title => :title}))
+        if(@code.update_attributes(params[:code], {:codetext => :codetext, :title => :title, :description => :description}))
             redirect_to @code
         end
     end

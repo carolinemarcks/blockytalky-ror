@@ -11,18 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20140126181717) do
-=======
-ActiveRecord::Schema.define(:version => 20140126210042) do
->>>>>>> cacb890d83e936d75e2fd4817be76706644d6ab4
+ActiveRecord::Schema.define(:version => 20140131155303) do
 
   create_table "codes", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.binary   "codetext"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "codetext"
     t.integer  "user_id"
     t.string   "title"
+    t.string   "description"
   end
 
   add_index "codes", ["user_id", "created_at"], :name => "index_codes_on_user_id_and_created_at"
