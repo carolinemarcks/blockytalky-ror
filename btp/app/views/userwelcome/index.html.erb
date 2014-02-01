@@ -26,20 +26,17 @@
     <div class="span10 offset2">
         <div class="tab-content">
             <div class="tab-pane active" id="tabhome">
-                <p>This is your home page!<p>
+              <p>This is your home page!<p>
+              <%= link_to "View Friends", "/users/" %>
             </div>
             <div class="tab-pane" id="tabbtu">
-                <p> This is where your BTU business will be! </p>
+              <p> This is where your BTU business will be! </p>
             </div>
             <div class="tab-pane" id="tabprofile">
-                <p> Account Information </p>
-                <p> User Name:     <%= current_user.name %> </p>
-                <p> Account Email: <%= current_user.email %> </p>
-                <p> School:        <%= current_user.school %> </p>
-                <%= link_to 'Update Profile', edit_user_registration_path %>
+              <%= render partial: "/users/profile", locals: {user: current_user} %>
             </div>
             <div class="tab-pane" id="tabcode">
-                <%= render partial: "code/codeList" %>
+              <%= render partial: "code/codeList", locals: {user: current_user} %>
         </div>
         </div>
     </div>

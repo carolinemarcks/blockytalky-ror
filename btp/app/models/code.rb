@@ -8,5 +8,6 @@ class Code < ActiveRecord::Base
     belongs_to :user
 
     validates :user_id, presence: true
+    # Test for error - renders page weirdly but data isn't lost
     validates :title, presence: true
 end

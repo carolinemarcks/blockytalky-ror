@@ -4,13 +4,31 @@ class CodeController < ApplicationController
         @user = current_user
         @code = Code.find(params[:id])
         if(!@code.owned_by?(@user))
-            redirect_to '/'
+            if @user.friends.include? @code.user
+                flash[:friend_code_id] = @code.id
+                redirect_to new_code_path
+            else
+                flash[:error] = "You aren't friends with the owner of that code"
+                redirect_to root
+            end
         end
     end
 
     def new
         @user = current_user
-        @code = @user.codes.new
+        if not flash[:friend_code_id]
+            @code = @user.codes.new
+        else
+            begin
+                friend_code = Code.find_by_id(flash[:friend_code_id])
+                @code = friend_code.dup
+                @code.user = current_user
+            rescue ActiveRecord::RecordNotFound
+                flash[:error] = "The code you were trying to view has been deleted"
+                @code = @user.codes.new
+            end
+        end
+        Rails.logger.debug @code.inspect
     end
 
     def index
@@ -30,6 +48,9 @@ class CodeController < ApplicationController
             redirect_to @code
         else
             render "new" #Hopefully this won't happen because then we lose progress
+            
+            # I think Rails keeps the data in the form (i.e. Rails magic takes care of it)
+            # I tested with the non-empty title validation -G.S.
         end
     end
 end

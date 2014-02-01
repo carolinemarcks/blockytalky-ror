@@ -18,7 +18,7 @@
         <% if @code.title.blank? %>
             <%= f.text_field :title, :id =>"codeTitle", :placeholder => "Name Your Program" %>
         <% else %>
-            <%= f.text_field :title, :id =>"codeTitle", :placeholder => @code.title %>
+            <%= f.text_field :title, :id =>"codeTitle", :value => @code.title %>
         <% end %>
     </p>
     <p class="span6 offset2">
