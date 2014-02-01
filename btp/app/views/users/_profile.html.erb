@@ -1,0 +1,22 @@
+<table class="table table-nonfluid">
+  <tr>
+    <th>Code:</th>
+    <th>User Information</th>
+  </tr>
+  <tr>
+    <td>
+      <% # List the code for the user that is passed in %>
+      <%= render partial: "/code/codeList", locals: {user: user} %></td>
+    <td>
+      <p> User Name:     <%= user.name %> </p>
+      <p> Account Email: <%= user.email %> </p>
+      <p> School:        <%= user.school %> </p>
+      <p> About Me: </p>
+      <p> Statistics: </p>
+      <% if user == current_user %>
+        <p> <%= link_to "Update Profile", edit_user_registration_path %> </p>
+        <p> <%= link_to "Manage Friends", users_path %> </p>
+      <% end %>
+    </td>
+  </tr>
+</table>

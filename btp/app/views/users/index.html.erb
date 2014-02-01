@@ -1,0 +1,48 @@
+<div class="row-fluid">
+  <div class="span10 offset2">
+    <h2>Friends!</h2>
+    <% if current_user.pending_invited.empty? and current_user.pending_invited_by.empty? and current_user.friends.empty? %>
+      You have no friends :(
+    <% else %>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Status</th>
+        </tr>
+
+        <% current_user.pending_invited.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, user_path(user.id) %></td>
+            <td><Pending></td>
+          </tr>
+        <% end %>
+
+        <% current_user.pending_invited_by.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, user_path(user.id) %></td>
+            <td><button type="button" class="btn btn-success" onclick="">Accept?</button>
+          </tr>
+        <% end %>
+
+        <% current_user.friends.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, user_path(user.id) %></td>
+            <td><button type="button" class="btn btn-danger" onclick="">Revoke?</button>
+          </tr>
+        <% end %>
+
+
+
+      </table>
+    <% end %>
+    Search for friends:
+    <table>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.name, user_path(user.id) %></td>
+          <td><button type="button" class="btn btn-primary" onclick="">Request Friend</button>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
