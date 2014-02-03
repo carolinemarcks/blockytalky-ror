@@ -14,13 +14,17 @@
 <% end %>
 
 <div class="row-fluid">
-    <p class="span10 offset2">
-        <% if @code.title.blank? %>
-            <%= f.text_field :title, :id =>"codeTitle", :placeholder => "Name Your Program" %>
-        <% else %>
-            <%= f.text_field :title, :id =>"codeTitle", :value => @code.title %>
-        <% end %>
-    </p>
+    <div class="span10 offset2">
+        <p>
+            <% if @code.title.blank? %>
+                <%= f.text_field :title, :id =>"codeTitle", :placeholder => "Name Your Program" %>
+            <% else %>
+                <%= f.text_field :title, :id =>"codeTitle", :value => @code.title %>
+            <% end %>
+        </p>
+    </div>
+</div>
+<div class="row-fluid">
     <p class="span6 offset2">
         <% if @code.description.blank? %>
           <%= f.text_area :description, :id =>"codeDescription", :placeholder => "Description"%>
