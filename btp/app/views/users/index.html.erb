@@ -12,34 +12,31 @@
 
         <% current_user.pending_invited.each do |user| %>
           <tr>
-            <td><%= link_to user.name, user_path(user.id) %></td>
+            <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
             <td><Pending></td>
           </tr>
         <% end %>
 
         <% current_user.pending_invited_by.each do |user| %>
           <tr>
-            <td><%= link_to user.name, user_path(user.id) %></td>
+            <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
             <td><button type="button" class="btn btn-success" onclick="">Accept?</button>
           </tr>
         <% end %>
 
         <% current_user.friends.each do |user| %>
           <tr>
-            <td><%= link_to user.name, user_path(user.id) %></td>
+            <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
             <td><button type="button" class="btn btn-danger" onclick="">Revoke?</button>
           </tr>
         <% end %>
-
-
-
       </table>
     <% end %>
     Search for friends:
     <table>
       <% @users.each do |user| %>
         <tr>
-          <td><%= link_to user.name, user_path(user.id) %></td>
+          <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
           <td><button type="button" class="btn btn-primary" onclick="">Request Friend</button>
         </tr>
       <% end %>
