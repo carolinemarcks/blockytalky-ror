@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140205180529) do
+ActiveRecord::Schema.define(:version => 20140206153148) do
 
   create_table "btus", :force => true do |t|
     t.string   "btuID"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20140205180529) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "about_me"
   end
 
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true

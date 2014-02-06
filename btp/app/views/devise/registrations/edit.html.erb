@@ -7,14 +7,18 @@
     <div><%= f.label :email %>
     <%= f.email_field :email, :autofocus => true %></div>
 
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
     <div><%= f.label :name %>
     <%= f.text_field :name %></div>
 
     <div><%= f.label :school %>
          <%= f.text_field :school %></div>
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
+
+    <div><%= f.label :about_me %>
+        <%= f.text_area :about_me, :style => "width: 500px; height: 100px;" %></div>
 
     <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, :autocomplete => "off" %></div>
