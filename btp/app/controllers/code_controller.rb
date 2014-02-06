@@ -9,7 +9,7 @@ class CodeController < ApplicationController
                 redirect_to new_code_path
             else
                 flash[:error] = "You aren't friends with the owner of that code"
-                redirect_to root
+                redirect_to root_path
             end
         end
     end
