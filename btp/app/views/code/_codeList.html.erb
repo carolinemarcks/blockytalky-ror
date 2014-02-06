@@ -9,15 +9,15 @@
           <a href=<%= code_path(code.id) %>>
             <%= code.title.blank? ? "(Unnamed Program)" : code.title %>
           </a>
-          <p>
+          <p><i id="codeDescription">
           <%= code.description.blank? ? "(No Description)" : truncate(code.description, length: 80) %>
-          </p>
+          </i></p>
         </div>
         <div id="rightCodeRow">
           <a href=<%= code_path(code.id) %> type="button" class="btn btn-info">
             Edit
           </a>
-          <%= button_to "Delete", {:controller => :userwelcome, :action => 'destroy', 
+          <%= button_to "Delete", {:controller => :code, :action => 'destroy', 
             :id => code.id }, :class => 'btn btn-danger', :method => :delete %>
         </div>
       </td>

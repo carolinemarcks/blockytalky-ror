@@ -11,12 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140131155303) do
+ActiveRecord::Schema.define(:version => 20140205180529) do
+
+  create_table "btus", :force => true do |t|
+    t.string   "btuID"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+    t.string   "title"
+  end
 
   create_table "codes", :force => true do |t|
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "codetext"
+    t.binary   "codetext"
     t.integer  "user_id"
     t.string   "title"
     t.string   "description"

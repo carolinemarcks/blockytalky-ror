@@ -30,7 +30,7 @@
               <%= link_to "View Friends", "/users/" %>
             </div>
             <div class="tab-pane" id="tabbtu">
-              <p> This is where your BTU business will be! </p>
+              <%= render partial: "/btu/btuList", locals: {user: current_user} %>
             </div>
             <div class="tab-pane" id="tabprofile">
               <%= render partial: "/users/profile", locals: {user: current_user} %>

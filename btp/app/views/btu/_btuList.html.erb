@@ -1,0 +1,28 @@
+<h3><u>Manage your Blocky Talky Units</u></h3> 
+<%# Display each btu that the user owns %>
+<table id="btuEntryTable" class="table table-striped table-bordered table-nonfluid">
+<% user.btus.each do |btu| %>
+  <% if !btu.nil? %>
+    <tr>
+      <td>
+        <div id="leftBtuRow">
+          <a href=<%= btu_path(btu.id) %>>
+            <%= btu.title.blank? ? "(Unnamed BTU)" : btu.title %>
+          </a>
+          <%= btu.btuID.blank? ? " id: (No ID)" : " id: "+ btu.btuID.to_s %>
+        </div>
+        <div id="rightBtuRow">
+          <a href=<%= btu_path(btu.id) %> type="button" class="btn btn-info">
+            Edit
+          </a>
+          <%= button_to "Delete", {:controller => :btu, :action => 'destroy', 
+            :id => btu.id }, :class => 'btn btn-danger', :method => :delete %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
+</table>
+<% if user == current_user %>
+  <a href=<%= new_btu_path %> type="button" class="btn btn-primary">Create New BTU</a>
+<% end %>

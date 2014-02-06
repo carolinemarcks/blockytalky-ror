@@ -6,6 +6,7 @@ Btp::Application.routes.draw do
     authenticated :user do
       root :to => "userwelcome#index"
       resources :code
+      resources :btu
       resources :users, :only => [:index, :show]
     end
 

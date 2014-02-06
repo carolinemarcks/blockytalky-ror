@@ -1,0 +1,4 @@
+<%= form_for @btu, :url => btu_path(@btu), :html => { :id => "btuForm"}, method: :put do |f| %>
+    <%= render partial: "btuForm", locals: {f: f, btu: @btu} %>
+<% end %>
+

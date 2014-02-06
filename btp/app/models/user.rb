@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :isTeacher, :name, :school
   has_many :codes
+  has_many :btus
 
   # Include the friend model (see https://github.com/raw1z/amistad/wiki)
   include Amistad::FriendModel
