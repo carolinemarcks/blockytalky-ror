@@ -1,15 +1,15 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    # Include default devise modules. Others available are:
+    # :confirmable, :lockable, :timeoutable and :omniauthable
+    devise :database_authenticatable, :registerable,
+        :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :isTeacher, :name, :school
-  has_many :codes
-  has_many :btus
+    # Setup accessible (or protected) attributes for your model
+    attr_accessible :email, :password, :password_confirmation, :remember_me
+    attr_accessible :isTeacher, :name, :school
+    has_many :codes
+    has_many :btus
 
-  # Include the friend model (see https://github.com/raw1z/amistad/wiki)
-  include Amistad::FriendModel
+    # Include the friend model (see https://github.com/raw1z/amistad/wiki)
+    include Amistad::FriendModel
 end

@@ -33,6 +33,4 @@ class BtuController < ApplicationController
         @btu.destroy
         redirect_to root_path
     end
-
-
 end

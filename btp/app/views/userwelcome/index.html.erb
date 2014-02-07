@@ -26,18 +26,18 @@
     <div class="span10 offset2">
         <div class="tab-content">
             <div class="tab-pane active" id="tabhome">
-              <p>This is your home page!<p>
-              <%= link_to "View Friends", "/users/" %>
+                <p>This is your home page!<p>
+                <%= link_to "View Friends", "/users/" %>
             </div>
             <div class="tab-pane" id="tabbtu">
-              <%= render partial: "/btu/btuList", locals: {user: current_user} %>
+                <%= render partial: "/btu/btuList", locals: {user: current_user} %>
             </div>
             <div class="tab-pane" id="tabprofile">
-              <%= render partial: "/users/profile", locals: {user: current_user} %>
+                <%= render partial: "/users/profile", locals: {user: current_user} %>
             </div>
             <div class="tab-pane" id="tabcode">
-              <%= render partial: "code/codeList", locals: {user: current_user} %>
-        </div>
+                <%= render partial: "code/codeList", locals: {user: current_user} %>
+            </div>
         </div>
     </div>
 </div>

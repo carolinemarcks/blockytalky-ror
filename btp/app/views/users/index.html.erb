@@ -1,52 +1,53 @@
 <div class="row-fluid">
-  <div class="span10 offset2">
+<div class="span10 offset2">
     <h2>Friends!</h2>
     <% if current_user.pending_invited.empty? and current_user.pending_invited_by.empty? and current_user.friends.empty? %>
       You have no friends :(
     <% else %>
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Status</th>
-        </tr>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+            </tr>
 
-        <% current_user.pending_invited.each do |user| %>
-          <tr>
-            <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
-            <td>Pending</td>
-          </tr>
-        <% end %>
+          <% current_user.pending_invited.each do |user| %>
+              <tr>
+                  <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
+                  <td>Pending</td>
+              </tr>
+          <% end %>
 
-        <% current_user.pending_invited_by.each do |user| %>
-          <tr>
-            <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
-            <td><button type="button" class="btn btn-success" onclick="">Accept?</button>
-          </tr>
-        <% end %>
+          <% current_user.pending_invited_by.each do |user| %>
+              <tr>
+                  <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
+                  <td><button type="button" class="btn btn-success" onclick="">Accept?</button>
+              </tr>
+          <% end %>
 
-        <% current_user.friends.each do |user| %>
-          <tr>
-            <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
-            <td><button type="button" class="btn btn-danger" onclick="">Revoke?</button>
-          </tr>
-        <% end %>
-      </table>
+          <% current_user.friends.each do |user| %>
+              <tr>
+                  <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
+                  <td><button type="button" class="btn btn-danger" onclick="">Revoke?</button>
+              </tr>
+          <% end %>
+        </table>
     <% end %>
     Search for friends:
     <table>
-      <% @users.each do |user| %>
-        <% if user != current_user and !user.connected_with? current_user %>
-          <tr>
-            <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
-            <td>
-              <%= form_tag(controller: "friendships", action: "request_friend") do %>
-                  <%= hidden_field_tag :friend_id, user.id %>
-                  <%= hidden_field_tag :id, current_user.id %>
-                  <%= submit_tag "Request Friend", class: "btn btn-primary" %>
-              <% end %>
-          </tr>
+        <% @users.each do |user| %>
+            <% if user != current_user and !user.connected_with? current_user %>
+                <tr>
+                    <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
+                    <td>
+                        <%= form_tag(controller: "friendships", action: "request_friend") do %>
+                            <%= hidden_field_tag :friend_id, user.id %>
+                            <%= hidden_field_tag :id, current_user.id %>
+                            <%= submit_tag "Request Friend", class: "btn btn-primary" %>
+                       <% end %>
+                    </td>
+                </tr>
+            <% end %>
         <% end %>
-      <% end %>
     </table>
-  </div>
+</div>
 </div>

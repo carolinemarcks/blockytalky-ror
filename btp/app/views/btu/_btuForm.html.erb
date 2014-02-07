@@ -1,15 +1,15 @@
 <% if @btu.errors.any? %>
     <div class="row-fluid">
-    <div class="span10 offset2">
-        <div id="error_explanation">
-            <h2><%= pluralize(@btu.errors.count, "error") %> prohibited this btu from being saved:</h2>
-            <ul>
-            <% @btu.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-            </ul>
+        <div class="span10 offset2">
+            <div id="error_explanation">
+                <h2><%= pluralize(@btu.errors.count, "error") %> prohibited this btu from being saved:</h2>
+                <ul>
+                    <% @btu.errors.full_messages.each do |msg| %>
+                        <li><%= msg %></li>
+                    <% end %>
+                </ul>
+            </div>
         </div>
-    </div>
     </div>
 <% end %>
 
