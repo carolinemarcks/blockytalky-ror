@@ -13,7 +13,7 @@
         <% current_user.pending_invited.each do |user| %>
           <tr>
             <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
-            <td><Pending></td>
+            <td>Pending</td>
           </tr>
         <% end %>
 
@@ -35,10 +35,17 @@
     Search for friends:
     <table>
       <% @users.each do |user| %>
-        <tr>
-          <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
-          <td><button type="button" class="btn btn-primary" onclick="">Request Friend</button>
-        </tr>
+        <% if user != current_user and !user.connected_with? current_user %>
+          <tr>
+            <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
+            <td>
+              <%= form_tag(controller: "friendships", action: "request_friend") do %>
+                  <%= hidden_field_tag :friend_id, user.id %>
+                  <%= hidden_field_tag :id, current_user.id %>
+                  <%= submit_tag "Request Friend", class: "btn btn-primary" %>
+              <% end %>
+          </tr>
+        <% end %>
       <% end %>
     </table>
   </div>
