@@ -35,3 +35,9 @@ when making a new controller, add:
     ...
     end
 
+Adding Sample Data
+==================
+To add sample data (100 users), run the following command:
+
+    bundle exec rake db:populate
+
