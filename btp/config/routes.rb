@@ -5,13 +5,14 @@ Btp::Application.routes.draw do
 
     authenticated :user do
         root :to => "userwelcome#index"
-        resources :code
-        resources :btu
-        resources :users, :only => [:index, :show] do
-            member do
-                post 'request_friend', controller: 'friendships'
-                post 'approve_friend',  controller: 'friendships'
-            end
+    end
+
+    resources :code
+    resources :btu
+    resources :users, :only => [:index, :show] do
+        member do
+            post 'request_friend', controller: 'friendships'
+            post 'approve_friend', controller: 'friendships'
         end
     end
 
