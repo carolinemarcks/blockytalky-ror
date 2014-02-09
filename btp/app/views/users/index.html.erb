@@ -39,9 +39,7 @@
                 <tr>
                     <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
                     <td>
-                        <%= form_tag(controller: "friendships", action: "request_friend") do %>
-                            <%= hidden_field_tag :friend_id, user.id %>
-                            <%= hidden_field_tag :id, current_user.id %>
+                        <%= form_tag request_friend_user_path(user.id) do %>
                             <%= submit_tag "Request Friend", class: "btn btn-primary" %>
                        <% end %>
                     </td>

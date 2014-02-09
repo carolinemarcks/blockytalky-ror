@@ -7,8 +7,11 @@ Btp::Application.routes.draw do
         root :to => "userwelcome#index"
         resources :code
         resources :btu
-        resources :users, :only => [:index, :show]
-        post 'request_friend', to: 'friendships#request_friend'
+        resources :users, :only => [:index, :show] do
+            member do
+                post 'request_friend', controller: 'friendships'
+            end
+        end
     end
 
     root :to => redirect("/users/sign_in")
