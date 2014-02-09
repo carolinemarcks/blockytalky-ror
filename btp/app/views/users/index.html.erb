@@ -20,7 +20,11 @@
           <% current_user.pending_invited_by.each do |user| %>
               <tr>
                   <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
-                  <td><button type="button" class="btn btn-success" onclick="">Accept?</button>
+                  <td>
+                      <%= form_tag approve_friend_user_path(user.id) do %>
+                          <%= submit_tag "Accept?", class: "btn btn-primary" %>
+                      <% end %>
+                  </td>
               </tr>
           <% end %>
 
@@ -41,7 +45,7 @@
                     <td>
                         <%= form_tag request_friend_user_path(user.id) do %>
                             <%= submit_tag "Request Friend", class: "btn btn-primary" %>
-                       <% end %>
+                        <% end %>
                     </td>
                 </tr>
             <% end %>

@@ -9,4 +9,10 @@ class FriendshipsController < ApplicationController
         current_user.invite @friend
         redirect_to :back
     end
+
+    def approve_friend
+        @friend = User.find(params[:id])
+        current_user.approve @friend
+        redirect_to :back
+    end
 end
