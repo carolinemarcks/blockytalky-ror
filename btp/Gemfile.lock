@@ -66,6 +66,9 @@ GEM
     multi_json (1.8.4)
     mysql2 (0.3.15)
     orm_adapter (0.5.0)
+    paper_trail (3.0.0)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.3)
@@ -135,6 +138,7 @@ DEPENDENCIES
   faker
   jquery-rails
   mysql2
+  paper_trail
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   sqlite3

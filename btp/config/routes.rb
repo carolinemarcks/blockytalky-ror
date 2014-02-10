@@ -7,7 +7,11 @@ Btp::Application.routes.draw do
         root :to => "userwelcome#index"
     end
 
-    resources :code
+    resources :code do
+        member do
+            get 'version/:version_id', to: 'code#version', as: 'version'
+        end
+    end
     resources :btu
     resources :users, :only => [:index, :show] do
         member do

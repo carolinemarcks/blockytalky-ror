@@ -41,3 +41,8 @@ To add sample data (100 users), run the following command:
 
     bundle exec rake db:populate
 
+Useful documentation for gems
+=============================
+Amistad: https://github.com/raw1z/amistad/wiki
+Paper_trail: https://github.com/airblade/paper_trail
+

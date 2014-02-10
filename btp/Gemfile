@@ -10,6 +10,7 @@ gem 'mysql2'
 gem 'devise'
 gem 'amistad'
 gem 'faker'
+gem 'paper_trail'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,16 +1,38 @@
 class CodeController < ApplicationController
     before_filter :authenticate_user!
-    def show
-        @user = current_user
-        @code = Code.find(params[:id])
-        if(!@code.owned_by?(@user))
-            if @user.friends.include? @code.user
-                flash[:friend_code_id] = @code.id
-                redirect_to new_code_path
-            else
+    before_filter :code_exists!, only: [:show, :version, :update, :destroy]
+    before_filter :can_read_code!, only: [:show, :version]
+    before_filter :can_alter_code!, only: [:destroy, :update]
+
+    def code_exists!
+        begin
+            @code = Code.find(params[:id])
+        rescue ActiveRecord::RecordNotFound
+            flash[:error] = "This code does not exist"
+            redirect_to code_index_path
+        end
+    end
+
+    def can_read_code!
+        if not @code.owned_by?(current_user)
+            if not current_user.friends.include? @code.user
                 flash[:error] = "You aren't friends with the owner of that code"
-                redirect_to root_path
+                redirect_to code_index_path
             end
+        end
+    end
+
+    def can_alter_code!
+        if not @code.owned_by?(current_user)
+            flash[:error] = "You do not have permission to modify this code"
+            redirect_to code_index_path
+        end
+    end
+
+    def show
+        if current_user.friends.include? @code.user
+            flash[:friend_code_id] = @code.id
+            redirect_to new_code_path
         end
     end
 
@@ -46,10 +68,7 @@ class CodeController < ApplicationController
         if @code.save
             redirect_to @code
         else
-            render "new" #Hopefully this won't happen because then we lose progress
-            
-            # I think Rails keeps the data in the form (i.e. Rails magic takes care of it)
-            # I tested with the non-empty title validation -G.S.
+            render "new"
         end
     end
 
@@ -58,6 +77,21 @@ class CodeController < ApplicationController
         @user.codes.delete_if{|o| o.id == params[:id]}
         @code = Code.find(params[:id])
         @code.destroy
-        redirect_to root_path
+        redirect_to code_index_path
+    end
+
+    def version
+        versioned = @code.versions[params[:version_id].to_i]
+        if not versioned
+            redirect_to @code
+        else
+            previous_version = versioned.reify
+            if previous_version
+                @code = previous_version
+                render "show"
+            else
+                redirect_to @code
+            end
+        end
     end
 end
