@@ -58,9 +58,15 @@ class CodeController < ApplicationController
     end
 
     def update
-        @code = Code.find(params[:id])
-        @code.update_attributes(params[:code], {:codetext => :codetext, :title => :title, :description => :description})
-        render "show"
+        new_code = params[:code]
+        version_id = new_code[:version_id]
+        @code.update_attributes(codetext: new_code[:codetext], title: new_code[:title], description: new_code[:description])
+        if version_id
+            destroy_versions_after @code.versions[version_id.to_i]
+            redirect_to @code
+        else
+            render "show"
+        end
     end
 
     def create
@@ -92,6 +98,15 @@ class CodeController < ApplicationController
             else
                 redirect_to @code
             end
+        end
+    end
+
+    def destroy_versions_after version
+        version = version.next
+        while version
+            tmp = version.next
+            version.destroy
+            version = tmp
         end
     end
 end

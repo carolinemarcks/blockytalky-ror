@@ -35,7 +35,10 @@
     </p>
 </div>
 
-<span id="codeFormXML">
+<% if not @code.live? %>
+    <%= f.hidden_field :version_id, value: @code.version.index %>
+<% end %>
+<div id="codeFormXML">
     <%= f.text_area :codetext, :class => "span9", :id =>"xmlText" %>
-</span>
+</div>
 
