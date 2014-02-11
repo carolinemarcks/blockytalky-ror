@@ -8,7 +8,7 @@ class CodeController < ApplicationController
         begin
             @code = Code.find(params[:id])
         rescue ActiveRecord::RecordNotFound
-            flash[:error] = "This code does not exist"
+            flash[:alert] = "This code does not exist"
             redirect_to code_index_path
         end
     end
@@ -16,7 +16,7 @@ class CodeController < ApplicationController
     def can_read_code!
         if not @code.owned_by?(current_user)
             if not current_user.friends.include? @code.user
-                flash[:error] = "You aren't friends with the owner of that code"
+                flash[:alert] = "You aren't friends with the owner of that code"
                 redirect_to code_index_path
             end
         end
@@ -24,16 +24,12 @@ class CodeController < ApplicationController
 
     def can_alter_code!
         if not @code.owned_by?(current_user)
-            flash[:error] = "You do not have permission to modify this code"
+            flash[:alert] = "You do not have permission to modify this code"
             redirect_to code_index_path
         end
     end
 
     def show
-        #if current_user.friends.include? @code.user
-        #    flash[:friend_code_id] = @code.id
-        #    redirect_to new_code_path
-        #end
     end
 
     def new
@@ -46,7 +42,7 @@ class CodeController < ApplicationController
                 @code = friend_code.dup
                 @code.user = current_user
             rescue ActiveRecord::RecordNotFound
-                flash[:error] = "The code you were trying to view has been deleted"
+                flash[:alert] = "The code you were trying to view has been deleted"
                 @code = @user.codes.new
             end
         end
