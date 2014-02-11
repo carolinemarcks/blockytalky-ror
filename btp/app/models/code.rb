@@ -1,6 +1,6 @@
 class Code < ActiveRecord::Base
     # https://github.com/airblade/paper_trail
-    has_paper_trail
+    has_paper_trail :on => [:update]
 
     def owned_by?(user)
         self.user_id == (user.try(:id) || user)
