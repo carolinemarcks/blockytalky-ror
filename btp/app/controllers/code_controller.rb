@@ -1,8 +1,8 @@
 class CodeController < ApplicationController
     before_filter :authenticate_user!
     before_filter :code_exists!, only: [:show, :version, :update, :destroy]
-    before_filter :can_read_code!, only: [:show, :version]
-    before_filter :can_alter_code!, only: [:destroy, :update]
+    before_filter :can_read_code!, only: [:show, :version, :update]
+    before_filter :can_alter_code!, only: [:destroy]
 
     def code_exists!
         begin
@@ -30,10 +30,10 @@ class CodeController < ApplicationController
     end
 
     def show
-        if current_user.friends.include? @code.user
-            flash[:friend_code_id] = @code.id
-            redirect_to new_code_path
-        end
+        #if current_user.friends.include? @code.user
+        #    flash[:friend_code_id] = @code.id
+        #    redirect_to new_code_path
+        #end
     end
 
     def new
@@ -60,13 +60,19 @@ class CodeController < ApplicationController
     def update
         new_code = params[:code]
         version_id = new_code[:version_id]
+        if not @code.user == current_user
+            if version_id
+                @code = @code.versions[version_id.to_i].reify
+            end
+            @code = @code.dup
+            @code.user = current_user
+            @code.save
+        end
         @code.update_attributes(codetext: new_code[:codetext], title: new_code[:title], description: new_code[:description])
         if version_id
             destroy_versions_after @code.versions[version_id.to_i]
-            redirect_to @code
-        else
-            render "show"
         end
+        redirect_to @code
     end
 
     def create
@@ -104,11 +110,13 @@ class CodeController < ApplicationController
     end
 
     def destroy_versions_after version
-        version = version.next
-        while version
-            tmp = version.next
-            version.destroy
-            version = tmp
+        if version
+            version = version.next
+            while version
+                tmp = version.next
+                version.destroy
+                version = tmp
+            end
         end
     end
 end
