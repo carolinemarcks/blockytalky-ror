@@ -7,10 +7,10 @@
 <% end %>
 
 <%= render partial: "codeSavingButtons" %>
-<% if @code.versions.count >= 2 %>
+<% if @code.versions.count >= 1 %>
     <% if not @code.version %>
         <%= link_to "Previous version", version_code_path(@code.id, @code.versions.last.index) %>
-    <% elsif @code.version.index >= 2 %>
+    <% elsif @code.version.index >= 1 %>
         <%= link_to "Previous version", version_code_path(@code.id, @code.version.previous.index) %>
     <% end %>
 
