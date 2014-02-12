@@ -33,42 +33,32 @@ class CodeController < ApplicationController
     end
 
     def new
-        @user = current_user
-        if not flash[:friend_code_id]
-            @code = @user.codes.new
-        else
-            begin
-                friend_code = Code.find_by_id(flash[:friend_code_id])
-                @code = friend_code.dup
-                @code.user = current_user
-            rescue ActiveRecord::RecordNotFound
-                flash[:alert] = "The code you were trying to view has been deleted"
-                @code = @user.codes.new
-            end
-        end
-        Rails.logger.debug @code.inspect
+        @code = current_user.codes.new
     end
 
     def index
         @user = current_user
     end
 
+    def update_code_attributes code, new_code
+        code.update_attributes(codetext: new_code[:codetext], title: new_code[:title], description: new_code[:description])
+    end
+
     def update
-        new_code = params[:code]
-        version_id = new_code[:version_id]
+        version_id = params[:code][:version_id]
         if not @code.user == current_user
-            if version_id
-                @code = @code.versions[version_id.to_i].reify
-            end
-            @code = @code.dup
-            @code.user = current_user
+            @code = current_user.codes.new
+            update_code_attributes @code, params[:code]
             @code.save
+            redirect_to @code
+        else
+            update_code_attributes @code, params[:code]
+            if version_id
+                destroy_versions_after @code.versions[version_id.to_i]
+                @code = Code.find(@code.id)
+            end
+            render "show"
         end
-        @code.update_attributes(codetext: new_code[:codetext], title: new_code[:title], description: new_code[:description])
-        if version_id
-            destroy_versions_after @code.versions[version_id.to_i]
-        end
-        redirect_to @code
     end
 
     def create
