@@ -6,19 +6,27 @@
     <%= render partial: "codeForm", locals: {f: f, code: @code} %>
 <% end %>
 
-<%= render partial: "codeSavingButtons" %>
+<%= render partial: "codeSavingButtons", locals:{user: @user}%>
+<br/>
 <% if @code.versions.count >= 1 %>
-    <% if not @code.version %>
-        <%= link_to "Previous version", version_code_path(@code.id, @code.versions.last.index) %>
-    <% elsif @code.version.index >= 1 %>
-        <%= link_to "Previous version", version_code_path(@code.id, @code.version.previous.index) %>
-    <% end %>
-
-    <% if @code.version %>
-        <% if @code.version.next %>
-            <%= link_to "Next version", version_code_path(@code.id, @code.version.next.index) %>
-        <% else %>
-            <%= link_to "Next version", code_path(@code.id) %>
+    <div class="row-fluid"><div class="span10 offset2">
+        <% if not @code.version %>
+            <a href=<%= version_code_path(@code.id, @code.versions.last.index) %> type="button"
+                class="btn btn-inverse">Previous Saved Version</a>
+        <% elsif @code.version.index >= 1 %>
+            <a href=<%= version_code_path(@code.id, @code.version.previous.index) %> type="button"
+                class="btn btn-inverse">Previous Saved Version</a>
         <% end %>
-    <% end %>
+
+        <% if @code.version %>
+            <% if @code.version.next %>
+                <a href=<%= version_code_path(@code.id, @code.version.next.index) %> type="button"
+                    class="btn btn-inverse">Next Saved Version</a>
+            <% else %>
+                <a href=<%= code_path(@code.id) %> type="button"
+                    class="btn btn-inverse">Next Saved Version</a>
+            <% end %>
+        <% end %>
+    </div></div>
+<br/>
 <% end %>

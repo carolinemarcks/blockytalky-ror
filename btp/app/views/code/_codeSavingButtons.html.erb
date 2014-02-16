@@ -9,12 +9,46 @@
                 </button>
             </div>
 
-            <div class="span2 offset5">
+            <div class="span2">
+                <a href="#deployModal" type="button" class="btn btn-success"
+                     data-toggle="modal">Run Code</a>
+            </div>
+
+            <div class="span2 offset4">
                 <button type="button" class="btn btn-danger"
                     onclick="clearCode()">Clear Blocks
                 </button>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="deployModal" class="modal hide fade" tabindex="-1" 
+    role="dialog" aria-labelledby="deployModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="deployModalLabel">Select BTU for deployment</h3>
+    </div>
+    <div class="modal-body">
+        <p>Choose your BTU</p>
+        <% if @user.btus.count >= 1 %>
+            <select>
+            <% @user.btus.each do |btu| %>
+                <% if !btu.nil? %>
+                    <option>
+                        <%= btu.title.blank? ? "(Unnamed BTU)" : btu.title %>
+                        <%= btu.btuID.blank? ? ": (No ID)" : ": " + truncate(btu.btuID, length: 40) %>
+                    </option>
+                <% end %>
+            <% end %>
+            </select>
+        <% else %>
+
+        <% end %>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary" onclick="deployCode()">Go!</button>
     </div>
 </div>
 
