@@ -30,9 +30,11 @@ class CodeController < ApplicationController
     end
 
     def show
+        @user = current_user
     end
 
     def new
+        @user = current_user
         @code = current_user.codes.new
     end
 
