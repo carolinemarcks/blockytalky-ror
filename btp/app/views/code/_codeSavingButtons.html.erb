@@ -32,10 +32,10 @@
     <div class="modal-body">
         <p>Choose your BTU</p>
         <% if @user.btus.count >= 1 %>
-            <select>
+            <select id="selectBTU" data-codeId="<%= @code.id %>">
             <% @user.btus.each do |btu| %>
                 <% if !btu.nil? %>
-                    <option>
+                    <option data-btuId="<%= btu.id %>">
                         <%= btu.title.blank? ? "(Unnamed BTU)" : btu.title %>
                         <%= btu.btuID.blank? ? ": (No ID)" : ": " + truncate(btu.btuID, length: 40) %>
                     </option>
