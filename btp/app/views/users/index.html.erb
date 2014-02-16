@@ -1,5 +1,5 @@
-<div class="row-fluid">
-<div class="span10 offset2">
+<div class="row">
+<div class="col-md-10 col-md-offset-2">
     <h2>Friends!</h2>
     <% if current_user.pending_invited.empty? and current_user.pending_invited_by.empty? and current_user.friends.empty? %>
       You have no friends :(
