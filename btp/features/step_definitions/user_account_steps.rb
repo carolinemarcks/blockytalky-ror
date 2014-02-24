@@ -1,5 +1,5 @@
 Given /^I am not authenticated$/ do
-      visit destroy_user_session_path
+    page.driver.submit :delete, destroy_user_session_path, {}
 end
 
 Given /^I am a new, authenticated user$/ do
