@@ -9,17 +9,12 @@
     <%= yield :head%>
 </head>
 <body>
-<p class="navbar-text pull-right">
 <% if notice %>
-    <p class="alert alert-notice"><%= notice %></p>
+    <div class="alert alert-info"><%= notice %></div>
 <% end %>
 <% if alert %>
-    <p class="alert alert-error"><%= alert %></p>
+    <div class="alert alert-error"><%= alert %></div>
 <% end %>
-
-<div id="secondaryContent">
-    <%= render 'common/session' %>
-</div>
 
 <div class="row">
     <div class="col-md-5 col-md-offset-4">
@@ -27,7 +22,13 @@
     </div>
 </div>
 
-<%= yield %>
+<div class="row">
+    <div class="col-md-2">
+        <%= render 'common/sidebar' %>
+    </div>
+    <div class="col-md-offset-2">
+    <%= yield %>
+    </div>
 
 </body>
 </html>

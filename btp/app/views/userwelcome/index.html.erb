@@ -1,10 +1,7 @@
-<div class="row">
-    <div class="col-md-7 col-md-offset-5">
+    <div class="col-md-7 col-md-offset-3">
         <h2>Welcome, <%= current_user.name %>!</h2>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-md-offset-2">
+    <div class="col-md-6">
         <ul class="nav nav-pills">
             <li class="active">
                 <a href="#tabhome" data-toggle="tab">Home</a>
@@ -20,14 +17,11 @@
             </li>
         </ul>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-10 col-md-offset-2">
+    <div class="col-md-10">
         <div class="tab-content">
             <div class="tab-pane active" id="tabhome">
                 <p>This is your home page!<p>
-                <%= link_to "View Friends", "/users/" %>
             </div>
             <div class="tab-pane" id="tabbtu">
                 <%= render partial: "/btu/btuList", locals: {user: current_user} %>
@@ -40,4 +34,3 @@
             </div>
         </div>
     </div>
-</div>
