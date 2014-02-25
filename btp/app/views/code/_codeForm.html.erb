@@ -1,6 +1,5 @@
 <% if @code.errors.any? %>
-    <div class="row">
-    <div class="col-md-10 col-md-offset-2">
+    <div class="col-md-10">
         <div id="error_explanation">
             <h2><%= pluralize(@code.errors.count, "error") %> prohibited this code from being saved:</h2>
             <ul>
@@ -10,11 +9,9 @@
             </ul>
         </div>
     </div>
-    </div>
 <% end %>
 
-<div class="row">
-    <div class="col-md-10 col-md-offset-2">
+    <div class="col-md-10">
         <p>
             <% if @code.title.blank? %>
                 <%= f.text_field :title, :id =>"codeTitle", :placeholder => "Name Your Program" %>
@@ -23,22 +20,20 @@
             <% end %>
         </p>
     </div>
-</div>
 
-<div class="row">
-    <p class="col-md-6 col-md-offset-2">
+    <div class="col-md-6">
         <% if @code.description.blank? %>
           <%= f.text_area :description, :id =>"codeDescription", :placeholder => "Description"%>
         <% else %>
           <%= f.text_area :description, :id =>"codeDescription", :value => @code.description %>
         <% end %>
-    </p>
-</div>
+    </div>
 
 <% if not @code.live? %>
     <%= f.hidden_field :version_id, value: @code.version.index %>
 <% end %>
+
 <div id="codeFormXML">
-    <%= f.text_area :codetext, :class => "col-md-9", :id =>"xmlText" %>
+    <%= f.text_area :codetext, :id =>"xmlText" %>
 </div>
 
