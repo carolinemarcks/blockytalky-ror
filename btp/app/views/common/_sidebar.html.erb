@@ -8,14 +8,14 @@
                 <i class="icon-dashboard"></i> My Profile
             </a>
             <%= link_to "View Friends", 
-                "/users/",
+                users_path,
                 :class=> "list-group-item" %>
             
             <%= link_to "BTU Management",
-                "/btu/",
+                btu_index_path,
                 :class=> "list-group-item" %>
             <%= link_to "Code",
-                "/code/",
+                code_index_path,
                 :class=> "list-group-item" %>
             <%= link_to 'Sign out', 
                 destroy_user_session_path, 
