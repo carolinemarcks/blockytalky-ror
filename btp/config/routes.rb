@@ -12,7 +12,13 @@ Btp::Application.routes.draw do
             get 'version/:version_id', to: 'code#version', as: 'version'
         end
     end
-    resources :btu
+    resources :btu do
+        member do
+            post 'code/:code_id/upload', to: 'code_deploy#upload_code', as: 'upload_code'
+            post 'run_code', controller: 'code_deploy'
+            post 'stop_code', controller: 'code_deploy'
+        end
+    end
     resources :users, :only => [:index, :show] do
         member do
             post 'request_friend', controller: 'friendships'
