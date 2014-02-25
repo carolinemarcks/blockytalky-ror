@@ -1,36 +1,5 @@
     <div class="col-md-7 col-md-offset-3">
         <h2>Welcome, <%= current_user.name %>!</h2>
     </div>
-    <div class="col-md-6">
-        <ul class="nav nav-pills">
-            <li class="active">
-                <a href="#tabhome" data-toggle="tab">Home</a>
-            </li>
-            <li>
-                <a href="#tabbtu" data-toggle="tab">BTU Management</a>
-            </li>
-            <li>
-                <a href="#tabcode" data-toggle="tab">Code</a>
-            </li>
-            <li>
-                <a href="#tabprofile" data-toggle="tab">Profile</a>
-            </li>
-        </ul>
-    </div>
 
-    <div class="col-md-10">
-        <div class="tab-content">
-            <div class="tab-pane active" id="tabhome">
-                <p>This is your home page!<p>
-            </div>
-            <div class="tab-pane" id="tabbtu">
-                <%= render partial: "/btu/btuList", locals: {user: current_user} %>
-            </div>
-            <div class="tab-pane" id="tabprofile">
-                <%= render partial: "/users/profile", locals: {user: current_user} %>
-            </div>
-            <div class="tab-pane" id="tabcode">
-                <%= render partial: "code/codeList", locals: {user: current_user} %>
-            </div>
-        </div>
-    </div>
+    <%= render partial: "/users/profile", locals: {user: current_user} %>
