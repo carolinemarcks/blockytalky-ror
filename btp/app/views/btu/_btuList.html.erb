@@ -9,7 +9,9 @@
                 <a href=<%= btu_path(btu.id) %>>
                     <%= btu.title.blank? ? "(Unnamed BTU)" : btu.title %>
                 </a>
-                <%= btu.btuID.blank? ? " id: (No ID)" : " id: "+ btu.btuID.to_s %>
+                <p><i id="btuItalicID">
+                    <%= btu.btuID.blank? ? " id: (No ID)" : " id: "+ btu.btuID.to_s %>
+                </i></p>
             </div>
             <div id="rightBtuRow">
                 <a href=<%= btu_path(btu.id) %> type="button" class="btn btn-info">

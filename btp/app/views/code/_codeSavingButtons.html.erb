@@ -10,8 +10,8 @@
             </div>
 
             <div class="col-md-2">
-                <a href="#deployModal" type="button" class="btn btn-success"
-                     data-toggle="modal">Run Code</a>
+                <button data-target="#deployModal" class="btn btn-success"
+                     data-toggle="modal">Run Code</button>
             </div>
 
             <div class="col-md-2 col-md-offset-3">
@@ -23,32 +23,35 @@
     </div>
 </div>
 
-<div id="deployModal" class="modal hide fade" tabindex="-1" 
+<div id="deployModal" class="modal fade" tabindex="-1" 
     role="dialog" aria-labelledby="deployModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="deployModalLabel">Select BTU for deployment</h3>
-    </div>
-    <div class="modal-body">
-        <p>Choose your BTU</p>
-        <% if @user.btus.count >= 1 %>
-            <select id="selectBTU" data-codeId="<%= @code.id %>">
-            <% @user.btus.each do |btu| %>
-                <% if !btu.nil? %>
-                    <option data-btuId="<%= btu.id %>">
-                        <%= btu.title.blank? ? "(Unnamed BTU)" : btu.title %>
-                        <%= btu.btuID.blank? ? ": (No ID)" : ": " + truncate(btu.btuID, length: 40) %>
-                    </option>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="deployModalLabel">Select BTU for deployment</h3>
+            </div>
+            <div class="modal-body">
+                <p>Choose your BTU:</p>
+                <% if @user.btus.count >= 1 %>
+                    <select id="selectBTU" data-codeId="<%= @code.id %>">
+                    <% @user.btus.each do |btu| %>
+                        <% if !btu.nil? %>
+                            <option data-btuId="<%= btu.id %>">
+                                <%= btu.title.blank? ? "(Unnamed BTU)" : btu.title %>
+                                <%= btu.btuID.blank? ? ": (No ID)" : ": " + truncate(btu.btuID, length: 40) %>
+                            </option>
+                        <% end %>
+                    <% end %>
+                    </select>
+                <% else %>
+        
                 <% end %>
-            <% end %>
-            </select>
-        <% else %>
-
-        <% end %>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary" onclick="deployCode()">Go!</button>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-primary" onclick="deployCode()">Go!</button>
+            </div>
+        </div>
     </div>
 </div>
-
