@@ -3,7 +3,7 @@
     <% if current_user.pending_invited.empty? and current_user.pending_invited_by.empty? and current_user.friends.empty? %>
       You have no friends :(
     <% else %>
-        <table>
+        <table class="table">
             <tr>
                 <th>Name</th>
                 <th>Status</th>
@@ -36,7 +36,11 @@
         </table>
     <% end %>
     Search for friends:
-    <table>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
         <% @users.each do |user| %>
             <% if user != current_user and !user.connected_with? current_user %>
                 <tr>

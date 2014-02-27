@@ -11,8 +11,9 @@
             <p> User Name:     <%= user.name %> </p>
             <p> Account Email: <%= user.email %> </p>
             <p> School:        <%= user.school %> </p>
-            <p> About Me:      <%= user.about_me %></p>
-            <p> Statistics: </p>
+            <p> About Me:      <%= truncate(user.about_me, length:70) %></p>
+            <p> Code Segments: <%= user.codes.count%> </p>
+            <p> Friends: <%= user.friends.count%> </p>
             <% if user == current_user %>
                 <p> <%= link_to "Update Profile", edit_user_registration_path %> </p>
                 <p> <%= link_to "Manage Friends", users_path %> </p>
