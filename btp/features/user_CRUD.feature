@@ -1,7 +1,7 @@
-Feature: User Accounts
+Feature: User CRUD
     In order to use the BTU portal
     As a user of the BTU portal
-    I should be able to create an account, login, and modify my account
+    I should be able to create, login, update, and remove an account
 
     Scenario Outline: Create a new account
         Given I am not authenticated
