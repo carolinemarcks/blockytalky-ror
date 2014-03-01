@@ -1,36 +1,44 @@
+<%
+    #TODO: not sure which controller file this should be in, but it shouldn't be here
+    def class_for_path(path)
+        c = "list-group-item"
+        if current_page? path
+            c += " active"
+        end
+        return c
+    end
+%>
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3>Navigation</h3>
     </div>
-    <div id="sidebar" class="list-group"> 
+    <div id="sidebar" class="list-group">
     <%- if user_signed_in? %>
-            <a href="/" class="list-group-item active">
-                <i class="icon-dashboard"></i> My Profile
-            </a>
+            <%= link_to 'Home', 
+                root_path,  
+                :class=> class_for_path(root_path) %> 
             <%= link_to "View Friends", 
                 users_path,
-                :class=> "list-group-item" %>
+                :class=> class_for_path(users_path) %>
             
             <%= link_to "BTU Management",
                 btu_index_path,
-                :class=> "list-group-item" %>
+                :class=> class_for_path(btu_index_path) %>
             <%= link_to "Code",
                 code_index_path,
-                :class=> "list-group-item" %>
+                :class=> class_for_path(code_index_path) %>
             <%= link_to 'Sign out', 
                 destroy_user_session_path, 
                 :method => :delete ,
-                :class=>"list-group-item"  %>
-            <%= link_to 'Home', 
-                "/",  
-                :class=>"list-group-item"  %> 
+                :class=> class_for_path(destroy_user_session_path)  %>
         <%- else %>
-            <%= link_to 'Register', 
-                new_user_registration_path, 
-                :class=>"list-group-item"  %>        
             <%= link_to 'Sign in', 
-                new_user_session_path , 
-                :class=>"list-group-item"  %>
+                new_user_session_path, 
+                :class=> class_for_path(new_user_session_path) %>
+            <%= link_to 'Register',
+                new_user_registration_path,
+                :class=> class_for_path(new_user_registration_path)  %>
         <%- end %>
     </div>
 </div>
