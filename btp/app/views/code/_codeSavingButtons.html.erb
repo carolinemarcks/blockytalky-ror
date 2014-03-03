@@ -33,9 +33,9 @@
             </div>
             <div class="modal-body">
                 <p>Choose your BTU:</p>
-                <% if @user.btus.count >= 1 %>
+                <% if current_user.btus.count >= 1 %>
                     <select id="selectBTU" data-codeId="<%= @code.id %>">
-                    <% @user.btus.each do |btu| %>
+                    <% current_user.btus.each do |btu| %>
                         <% if !btu.nil? %>
                             <option data-btuId="<%= btu.id %>">
                                 <%= btu.title.blank? ? "(Unnamed BTU)" : btu.title %>
