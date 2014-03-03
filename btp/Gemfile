@@ -17,6 +17,7 @@ group :test do
     gem 'database_cleaner'
     gem 'cucumber-rails'
     gem 'factory_girl_rails'
+    gem 'capybara', '>=0.4.0'
     gem 'rspec-rails'
 end
 
