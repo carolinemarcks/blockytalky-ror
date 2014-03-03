@@ -12,7 +12,7 @@ Feature: User CRUD
         And I fill in "user_password" with "<password>"
         And I fill in "user_password_confirmation" with "<password>"
         And I press "Sign up"
-        Then I should see "Current User: <name>"
+        Then I should see "<name>"
 
         Examples:
             | email            | name        | school    | password    |
@@ -31,6 +31,6 @@ Feature: User CRUD
     Scenario: Willing to edit my account
         Given I am a new, authenticated user
         When I change my username to "bubbub"
-        Then I should see "Current User: bubbub"
+        Then I should see "bubbub"
         # Add more checking stuff
 
