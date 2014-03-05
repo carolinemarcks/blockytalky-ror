@@ -8,6 +8,7 @@ class Code < ActiveRecord::Base
 
     attr_accessible :codetext, :title, :description
     belongs_to :user
+    has_many :code_urls, dependent: :destroy
 
     # Test for error - renders page weirdly but data isn't lost
     validates :user_id, presence: true

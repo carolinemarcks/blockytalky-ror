@@ -10,8 +10,12 @@ Btp::Application.routes.draw do
     resources :code do
         member do
             get 'version/:version_id', to: 'code#version', as: 'version'
+            get 'uniqueId' #TODO delete this and use websockets?
         end
+        #TODO: make this url better?
+        get 'fromGuid/:guid', to: 'code#fromGuid', as: 'fromGuid', on: :collection
     end
+    
     resources :btu do
         member do
             post 'code/:code_id/upload', to: 'code_deploy#upload_code', as: 'upload_code'

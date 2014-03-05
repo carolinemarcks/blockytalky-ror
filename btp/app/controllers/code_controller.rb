@@ -1,7 +1,6 @@
 class CodeController < ApplicationController
-    before_filter :authenticate_user!
-    before_filter :code_exists!, only: [:show, :version, :update, :destroy]
-    before_filter :can_read_code!, only: [:show, :version, :update]
+    before_filter :authenticate_user!, except: [:fromGuid]
+    before_filter :can_read_code!, only: [:show, :version, :update, :uniqueId]
     before_filter :can_alter_code!, only: [:destroy]
 
     def code_exists!
@@ -14,6 +13,7 @@ class CodeController < ApplicationController
     end
 
     def can_read_code!
+        code_exists!
         if not @code.owned_by?(current_user)
             if not current_user.friends.include? @code.user
                 flash[:alert] = "You aren't friends with the owner of that code"
@@ -23,6 +23,7 @@ class CodeController < ApplicationController
     end
 
     def can_alter_code!
+        code_exists!
         if not @code.owned_by?(current_user)
             flash[:alert] = "You do not have permission to modify this code"
             redirect_to code_index_path
@@ -97,6 +98,25 @@ class CodeController < ApplicationController
         end
     end
 
+    #Creates a one-time-use unique url for a block of code
+    #TODO: move uniqueId and fromGuid to their own controller?
+    def uniqueId
+        codeUrl = @code.code_urls.create
+        redirect_to fromGuid_code_index_url(codeUrl.guid)
+    end
+
+    def fromGuid
+        codeUrl = CodeUrl.find_by_guid(params[:guid])
+        if not codeUrl
+            render_404
+        else
+            @code = codeUrl.code
+            render "show"
+            codeUrl.destroy
+        end
+    end
+
+    private
     def destroy_versions_after version
         if version
             version = version.next
