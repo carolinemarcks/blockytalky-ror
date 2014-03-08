@@ -1,6 +1,10 @@
 Btp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # Precompile devise templates etc., see:
+  # http://stackoverflow.com/questions/7425929/rails-3-1-strategy-for-pre-compiling-controller-specific-js-assets  
+  config.assets.precompile += %w( *.js )
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
