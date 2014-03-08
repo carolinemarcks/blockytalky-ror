@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20140304005945) do
   create_table "codes", :force => true do |t|
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "codetext"
+    t.binary   "codetext"
     t.integer  "user_id"
     t.string   "title"
     t.string   "description"
