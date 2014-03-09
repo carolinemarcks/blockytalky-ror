@@ -12,6 +12,7 @@
                 <p><i id="codeDescription">
                     <%= code.description.blank? ? "(No Description)" : truncate(code.description, length: 80) %>
                 </i></p>
+                <p> <%= code.privacy %> </p>
             </div>
             <div id="rightCodeRow">
                 <a href=<%= code_path(code.id) %> type="button" class="btn btn-info">Edit</a>

@@ -14,12 +14,16 @@ class CodeController < ApplicationController
 
     def can_read_code!
         code_exists!
-        if not @code.owned_by?(current_user)
+        if not @code.owned_by?(current_user) and not @code.public?
             if not current_user.friends.include? @code.user
                 flash[:alert] = "You aren't friends with the owner of that code"
                 redirect_to code_index_path
             end
-        end
+            if @code.private?
+                flash[:alert] = "This code is private"
+                redirect_to code_index_path
+            end
+       end
     end
 
     def can_alter_code!
@@ -37,6 +41,7 @@ class CodeController < ApplicationController
     def new
         @user = current_user
         @code = current_user.codes.new
+        @code.privacy = :friends
     end
 
     def index
@@ -44,7 +49,9 @@ class CodeController < ApplicationController
     end
 
     def update_code_attributes code, new_code
-        code.update_attributes(codetext: new_code[:codetext], title: new_code[:title], description: new_code[:description])
+        Rails.logger.debug new_code
+        Rails.logger.debug "\n\n\n\n\n"
+        code.update_attributes(new_code)
     end
 
     def update
@@ -66,6 +73,7 @@ class CodeController < ApplicationController
 
     def create
         @code = current_user.codes.new(params[:code])
+        Rails.logger.debug params
         if @code.save
             redirect_to @code
         else

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140304005945) do
+ActiveRecord::Schema.define(:version => 20140308173000) do
 
   create_table "btus", :force => true do |t|
     t.string   "btuID"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20140304005945) do
     t.integer  "user_id"
     t.string   "title"
     t.string   "description"
+    t.string   "privacy"
   end
 
   add_index "codes", ["user_id", "created_at"], :name => "index_codes_on_user_id_and_created_at"
