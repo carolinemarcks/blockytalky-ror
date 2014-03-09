@@ -1,0 +1,1 @@
+(function(){this.saveBtu=function(){return $("#btuForm").submit()}}).call(this);
