@@ -27,43 +27,18 @@ class CodeDeployController < ApplicationController
     end
 
     def upload_code
-        uri = URI.parse(blockly_server + "upload")
-        http = Net::HTTP.new(uri.host, uri.port)
-        request = Net::HTTP::Post.new(uri.request_uri)
-        request.body = @code.codetext
-        begin
-            response = http.request(request)
-        rescue EOFError
-        end
-        logger.debug blockly_server
-        redirect_to :back
+        @btu.send_upload @code
+        render text: "OK"
     end
 
     def run_code
-        url = blockly_server + "run"
-        response = empty_post_request url
-        if response.status != 200
-            flash[:alert] = "Unable to run the code"
-        end
-        redirect_to :back
+        @btu.send_run
+        render text: "OK"
     end
 
     def stop_code
-        url = blockly_server + "stop"
-        response = empty_post_request url
-        if response.status != 200
-            flash[:alert] = "Unable to stop the code"
-        end
-        redirect_to :back
+        @btu.send_stop
+        render text: "OK"
     end
 
-    #TODO: sanitize this
-    private
-    def blockly_server
-        "http://%s.broke-it.net:5000/" % @btu.title
-    end
-
-    def empty_post_request url
-        Net::HTTP.post_form(URI.parse(url), {})
-    end
 end

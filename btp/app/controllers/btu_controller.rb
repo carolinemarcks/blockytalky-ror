@@ -22,8 +22,11 @@ class BtuController < ApplicationController
 
     def update
         @btu = Btu.find(params[:id])
-        @btu.update_attributes(params[:btu], {:btuID => :btuID, :title => :title})
-        redirect_to root_path
+        if @btu.update_attributes(params[:btu], {:btuID => :btuID, :title => :title})
+            redirect_to root_path
+        else
+            render "show"
+        end
     end
 
     def destroy
