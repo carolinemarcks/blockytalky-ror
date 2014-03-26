@@ -1,8 +1,10 @@
 require 'faye/websocket'
 require 'json'
+require 'thread'
 
 class Btu < ActiveRecord::Base
     @@ws = nil
+    @@ws_is_initializing = false
 
     belongs_to :user
 
@@ -52,37 +54,54 @@ class Btu < ActiveRecord::Base
                    destination: self.title, #TODO: use the UUID
                    channel: "Server",
                    content: data}
-        if @@ws
-            @@ws.send message.to_json
-        else
-            if not @queue
+        if !(@@ws_is_initializing or @@ws)
+            make_dax_websocket
+        end
+
+        if @@ws_is_initializing
+            if !@queue
                 @queue = Queue.new
             end
             @queue << message.to_json
+        else
+            @@ws.send(message.to_json)
         end
         p message #TODO: delete
     end
 
     def make_dax_websocket
-        if @@ws
+        if @@ws or @@ws_is_initializing
             return
         end
-        p "Making the websocket"
-        ws = Faye::WebSocket::Client.new('ws://localhost:8005/dax') #TODO: change to dax
-        #ws = Faye::WebSocket::Client.new('ws://btrouter.getdown.org:8005/dax')
+        @@ws_is_initializing = true
 
-        ws.on :open do |event|
-            @@ws = ws
-            self.clear_queue
-        end
+        wb_thread = Thread.new do
+            EM.run {
+                p "Making the websocket"
+                @@ws = Faye::WebSocket::Client.new('ws://localhost:8005/dax') #TODO: change to dax
+                #@@ws = Faye::WebSocket::Client.new('ws://btrouter.getdown.org:8005/dax')
+                ws = @@ws
 
-        ws.on :message do |event|
-            p [:message, event.data]
-        end
+                ws.on :open do |event|
+                    self.clear_queue
+                    @@ws_is_initializing = false
+                    p "Successfully created the websocket"
+                end
 
-        ws.on :close do |event|
-            p [:close, event.code, event.reason]
-            @@ws = nil
+                ws.on :message do |event|
+                    p [:message, event.data]
+                end
+
+                ws.on :close do |event|
+                    p [:close, event.code, event.reason]
+                    @@ws = nil
+                    @@ws_is_initializing = false
+                end
+
+                ws.on :error do |event|
+                    p [:websocket_error, event]
+                end
+            }
         end
     end
 end
