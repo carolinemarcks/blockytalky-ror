@@ -67,6 +67,15 @@
         alert(msg);
       }
     }
+    function renderBlocksInner(code){
+        var xml_text = Blockly.Xml.textToDom(code);
+        // XSS IS A FACTOR NOW AAAAA
+        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml_text);
+    } 
+    function printblockly(){
+        console.log("printing")
+        console.log(Blockly)
+    }
   </script>
 </head>
 <body onload="init()">

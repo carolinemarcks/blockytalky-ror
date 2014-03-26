@@ -13,18 +13,26 @@
         if(hasInit){return;}
         hasInit = true;
     
-        if(codepage) console.log('yolo')
         $('#blocklyDiv').html(codepage.start({},null,
             {langSrc: BlocklyApps.LANGUAGES[BlocklyApps.LANG][2]}));
 
-
-        <% if(@code.codetext) %>
-            var code =  <%= ("'" + @code.codetext + "'").html_safe %> ;
-            var xml_text = Blockly.Xml.textToDom(code);
-            //XSS IS A FACTOR NOW AAAAA
-            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml_text);
-        <% end %>
+        
+        }
+    function printblockly2(){
+        var el = document.getElementById("content_blocks");
+        el.contentWindow.printblockly()
+     
     }
+    function renderBlocksOuter(){
+       <% if(@code.codetext) %>
+            var code =  <%= ("'" + @code.codetext + "'").html_safe %> ;
+            var el = document.getElementById("content_blocks");
+            el.contentWindow.renderBlocksInner(code);
+        <% end %>
+
+
+    }
+        
     $(document).ready(doBlocklyInitialize);
 </script>
 
