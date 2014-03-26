@@ -7,7 +7,7 @@ Btp::Application.routes.draw do
         root :to => "userwelcome#index"
     end
 
-    resources :code do
+    resources :code, :except => [:edit] do
         member do
             get 'version/:version_id', to: 'code#version', as: 'version'
             get 'uniqueId' #TODO delete this and use websockets?

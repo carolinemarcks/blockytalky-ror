@@ -32,6 +32,10 @@ class CodeController < ApplicationController
 
     def show
         @user = current_user
+        respond_to do |format|
+            format.html
+            format.json { render json: @code }
+        end
     end
 
     def new
