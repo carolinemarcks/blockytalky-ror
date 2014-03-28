@@ -1,1 +1,0 @@
-(function(){this.removeCode=function(){return window.alert("Are you suuuure? (btw this wont do anything)")}}).call(this);

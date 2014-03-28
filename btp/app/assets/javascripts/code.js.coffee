@@ -10,6 +10,20 @@
 @clearCode = ->
     Blockly.mainWorkspace.clear();
 
+@stopCode = ->
+    btuID = $('#selectBTUStop option:selected').attr('data-btuId');
+    buildUrl = "/btu/" + btuID + "/stop_code";
+    $.ajax
+        url: buildUrl,
+        type: "POST",
+        success: ->
+            alert("success in telling controller to stop code");
+            return
+        failure: ->
+            alert("Something done got goofed when stopping code");
+            return
+    return;
+
 @deployCode = ->
     btuID = $('#selectBTU option:selected').attr('data-btuId');
     codeID = $('#selectBTU').attr('data-codeId');
