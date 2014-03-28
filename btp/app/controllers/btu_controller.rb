@@ -12,12 +12,19 @@ class BtuController < ApplicationController
     def new
         @user = current_user
         @btu = @user.btus.new
-        @btu.save
-        redirect_to @btu
     end
 
     def index
         @user = current_user
+    end
+
+    def create
+        @btu = current_user.btus.new(params[:btu])
+        if @btu.save
+            redirect_to @btu
+        else
+            render "new"
+        end
     end
 
     def update
@@ -34,6 +41,6 @@ class BtuController < ApplicationController
         @user.btus.delete_if{|o| o.id == params[:id]}
         @btu = Btu.find(params[:id])
         @btu.destroy
-        redirect_to root_path
+        redirect_to btu_index_path
     end
 end
