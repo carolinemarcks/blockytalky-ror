@@ -2,7 +2,7 @@ class CodeController < BaseController
     before_filter :authenticate_user!, except: [:fromGuid]
     before_filter :can_read_code!, only: [:show, :version, :update, :uniqueId]
     before_filter :can_alter_code!, only: [:destroy]
-    before_filter :code_versioning!, only: [:show]
+    before_filter :code_versioning!, only: [:show, :uniqueId]
 
     def can_read_code!
         code_exists!
@@ -91,11 +91,7 @@ class CodeController < BaseController
     #Creates a one-time-use unique url for a block of code
     #TODO: move uniqueId and fromGuid to their own controller?
     def uniqueId
-        codeUrl = @code.code_urls.create
-        version = params[:version_id]
-        if !version.nil?
-            codeUrl.update_attributes(code_version: version.to_i)
-        end
+        codeUrl = @code.unique_url
         redirect_to codeUrl.url
     end
 

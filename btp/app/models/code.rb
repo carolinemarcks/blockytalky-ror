@@ -14,4 +14,14 @@ class Code < ActiveRecord::Base
     validates :user_id, presence: true
     validates :title, presence: true
     validates :codetext, presence: true
+
+    def unique_url
+        codeUrl = self.code_urls.create
+        version = self.version
+        if !version.nil?
+            codeUrl.update_attributes(code_version: version.to_i)
+        end
+        
+        codeUrl
+    end
 end
