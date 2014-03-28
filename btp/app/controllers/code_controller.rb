@@ -110,7 +110,7 @@ class CodeController < ApplicationController
         if !version.nil?
             codeUrl.update_attributes(code_version: version.to_i)
         end
-        redirect_to fromGuid_code_index_url(codeUrl.guid)
+        redirect_to fromGuid_code_url(codeUrl.guid)
     end
 
     def fromGuid

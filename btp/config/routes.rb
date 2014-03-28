@@ -14,8 +14,8 @@ Btp::Application.routes.draw do
             get 'version/:version_id/uniqueId', to: 'code#uniqueId'
         end
         #TODO: make this url better?
-        get 'fromGuid/:guid', to: 'code#fromGuid', as: 'fromGuid', on: :collection
     end
+    get 'code/fromGuid/:guid', to: 'code#fromGuid', as: 'fromGuid_code'
     
     resources :btu do
         member do
