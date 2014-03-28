@@ -1,5 +1,6 @@
-class BtuController < ApplicationController
+class BtuController < BaseController
     before_filter :authenticate_user!
+    before_filter :btu_exists!, only: [:update, :destroy]
 
     def show
         @user = current_user
@@ -28,18 +29,13 @@ class BtuController < ApplicationController
     end
 
     def update
-        @btu = Btu.find(params[:id])
-        if @btu.update_attributes(params[:btu], {:btuID => :btuID, :title => :title})
-            redirect_to root_path
-        else
-            render "show"
-        end
+        @btu.update_attributes(params[:btu], {:btuID => :btuID, :title => :title})
+        render "show"
     end
 
     def destroy
         @user = current_user
         @user.btus.delete_if{|o| o.id == params[:id]}
-        @btu = Btu.find(params[:id])
         @btu.destroy
         redirect_to btu_index_path
     end

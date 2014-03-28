@@ -1,17 +1,8 @@
-class CodeController < ApplicationController
+class CodeController < BaseController
     before_filter :authenticate_user!, except: [:fromGuid]
     before_filter :can_read_code!, only: [:show, :version, :update, :uniqueId]
     before_filter :can_alter_code!, only: [:destroy]
     before_filter :code_versioning!, only: [:show]
-
-    def code_exists!
-        begin
-            @code = Code.find(params[:id])
-        rescue ActiveRecord::RecordNotFound
-            flash[:alert] = "This code does not exist"
-            redirect_to code_index_path
-        end
-    end
 
     def can_read_code!
         code_exists!
