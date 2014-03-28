@@ -17,6 +17,10 @@ class CodeUrl < ActiveRecord::Base
         end
     end
 
+    def url
+        Rails.application.routes.url_helpers.fromGuid_code_url(self.guid)
+    end
+
     protected
     def generate_guid
         self.guid = loop do

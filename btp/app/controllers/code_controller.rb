@@ -2,6 +2,7 @@ class CodeController < ApplicationController
     before_filter :authenticate_user!, except: [:fromGuid]
     before_filter :can_read_code!, only: [:show, :version, :update, :uniqueId]
     before_filter :can_alter_code!, only: [:destroy]
+    before_filter :code_versioning!, only: [:show]
 
     def code_exists!
         begin
@@ -27,6 +28,15 @@ class CodeController < ApplicationController
         if not @code.owned_by?(current_user)
             flash[:alert] = "You do not have permission to modify this code"
             redirect_to code_index_path
+        end
+    end
+
+    def code_versioning!
+        if !params[:version_id].nil?
+            versioned = @code.versions[params[:version_id].to_i]
+            if !versioned.nil?
+                @code = versioned.reify
+            end
         end
     end
 
@@ -87,21 +97,6 @@ class CodeController < ApplicationController
         redirect_to code_index_path
     end
 
-    def version
-        versioned = @code.versions[params[:version_id].to_i]
-        if not versioned
-            redirect_to @code
-        else
-            previous_version = versioned.reify
-            if previous_version
-                @code = previous_version
-                render "show"
-            else
-                redirect_to @code
-            end
-        end
-    end
-
     #Creates a one-time-use unique url for a block of code
     #TODO: move uniqueId and fromGuid to their own controller?
     def uniqueId
@@ -110,7 +105,7 @@ class CodeController < ApplicationController
         if !version.nil?
             codeUrl.update_attributes(code_version: version.to_i)
         end
-        redirect_to fromGuid_code_url(codeUrl.guid)
+        redirect_to codeUrl.url
     end
 
     def fromGuid

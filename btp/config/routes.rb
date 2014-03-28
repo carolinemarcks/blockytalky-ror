@@ -9,11 +9,8 @@ Btp::Application.routes.draw do
 
     resources :code, :except => [:edit] do
         member do
-            get 'version/:version_id', to: 'code#version', as: 'version'
             get 'uniqueId'
-            get 'version/:version_id/uniqueId', to: 'code#uniqueId'
         end
-        #TODO: make this url better?
     end
     get 'code/fromGuid/:guid', to: 'code#fromGuid', as: 'fromGuid_code'
     
