@@ -19,7 +19,6 @@ Btp::Application.routes.draw do
     resources :btu do
         member do
             post 'code/:code_id/upload', to: 'code_deploy#upload_code', as: 'upload_code'
-            post 'run_code', controller: 'code_deploy'
             post 'stop_code', controller: 'code_deploy'
         end
     end

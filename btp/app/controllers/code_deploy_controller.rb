@@ -26,11 +26,6 @@ class CodeDeployController < ApplicationController
         end
     end
 
-    def upload_code
-        @btu.send_upload @code
-        render text: "OK"
-    end
-
     def run_code
         @btu.send_run
         render text: "OK"

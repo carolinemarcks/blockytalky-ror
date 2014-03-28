@@ -22,12 +22,8 @@ class Btu < ActiveRecord::Base
         send_message(:stop_code, nil)
     end
 
-    def send_run
-        send_message(:run_code, nil)
-    end
-
     def send_upload code
-        url = Rails.application.routes.url_helpers.code_path code.id, format: :json
+        url = Rails.application.routes.url_helpers.code_url code.id, format: :json
         send_message(:upload_code, {url: url, updated_at: code.updated_at})
     end
 
@@ -96,6 +92,7 @@ class Btu < ActiveRecord::Base
                     p [:close, event.code, event.reason]
                     @@ws = nil
                     @@ws_is_initializing = false
+                    wb_thread.stop
                 end
 
                 ws.on :error do |event|
