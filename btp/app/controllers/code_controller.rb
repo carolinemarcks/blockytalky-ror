@@ -106,17 +106,25 @@ class CodeController < ApplicationController
     #TODO: move uniqueId and fromGuid to their own controller?
     def uniqueId
         codeUrl = @code.code_urls.create
+        version = params[:version_id]
+        if !version.nil?
+            codeUrl.update_attributes(code_version: version.to_i)
+        end
         redirect_to fromGuid_code_index_url(codeUrl.guid)
     end
 
     def fromGuid
         codeUrl = CodeUrl.find_by_guid(params[:guid])
-        if not codeUrl
-            render_404
-        else
-            @code = codeUrl.code
-            render "show"
-            codeUrl.destroy
+        respond_to do |format|
+            format.html {
+                if not codeUrl
+                    render_404
+                else
+                    @code = codeUrl.versioned_code
+                    render "show"
+                end
+            }
+            format.json { render json: codeUrl.versioned_code }
         end
     end
 

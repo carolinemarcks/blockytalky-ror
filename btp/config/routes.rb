@@ -10,7 +10,8 @@ Btp::Application.routes.draw do
     resources :code, :except => [:edit] do
         member do
             get 'version/:version_id', to: 'code#version', as: 'version'
-            get 'uniqueId' #TODO delete this and use websockets?
+            get 'uniqueId'
+            get 'version/:version_id/uniqueId', to: 'code#uniqueId'
         end
         #TODO: make this url better?
         get 'fromGuid/:guid', to: 'code#fromGuid', as: 'fromGuid', on: :collection
