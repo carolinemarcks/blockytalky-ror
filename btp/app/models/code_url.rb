@@ -17,8 +17,8 @@ class CodeUrl < ActiveRecord::Base
         end
     end
 
-    def url
-        Rails.application.routes.url_helpers.fromGuid_code_url(self.guid)
+    def url format
+        Rails.application.routes.url_helpers.fromGuid_code_url(self.guid, format: format)
     end
 
     protected

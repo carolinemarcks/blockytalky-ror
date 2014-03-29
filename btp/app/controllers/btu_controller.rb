@@ -1,13 +1,9 @@
 class BtuController < BaseController
     before_filter :authenticate_user!
-    before_filter :btu_exists!, only: [:update, :destroy]
+    before_filter :btu_exists!, only: [:show, :update, :destroy]
 
     def show
         @user = current_user
-        @btu = Btu.find(params[:id])
-        if(!@btu.owned_by?(@user))
-            redirect_to root_path
-        end
     end
 
     def new

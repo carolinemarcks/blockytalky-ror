@@ -11,6 +11,10 @@ class BaseController < ApplicationController
     def btu_exists!
         begin
             @btu = Btu.find(params[:id])
+            if @btu.user != current_user
+                flash[:alert] = "You do not own this BTU"
+                redirect_to btu_index_path
+            end
         rescue ActiveRecord::RecordNotFound
             flash[:alert] = "This BTU does not exist"
             redirect_to btu_index_path

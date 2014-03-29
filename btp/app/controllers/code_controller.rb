@@ -92,7 +92,7 @@ class CodeController < BaseController
     #TODO: move uniqueId and fromGuid to their own controller?
     def uniqueId
         codeUrl = @code.unique_url
-        redirect_to codeUrl.url
+        redirect_to codeUrl.url(:html)
     end
 
     def fromGuid

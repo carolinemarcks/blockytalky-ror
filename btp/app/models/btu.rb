@@ -23,7 +23,7 @@ class Btu < ActiveRecord::Base
     end
 
     def send_upload code
-        url = Rails.application.routes.url_helpers.code_url code.id, format: :json
+        url = code.unique_url.url(:json)
         send_message(:upload_code, {url: url, updated_at: code.updated_at})
     end
 
