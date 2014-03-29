@@ -13,11 +13,11 @@
 
     <div class="col-md-10">
         <p>
-            <label for="title">Code Title</label><br/>
+            <label for="codeTitle">Code Title</label><br/>
             <% if @code.title.blank? %>
-                <%= f.text_field :title, :placeholder => "Name Your Program" %>
+                <%= f.text_field :title, :id =>"codeTitle", :placeholder => "Name Your Program" %>
             <% else %>
-                <%= f.text_field :title, :value => @code.title %>
+                <%= f.text_field :title, :id =>"codeTitle", :value => @code.title %>
             <% end %>
         </p>
     </div>
@@ -29,16 +29,6 @@
         <% else %>
           <%= f.text_area :description, :id =>"codeDescription", :value => @code.description %>
         <% end %>
-    </div>
-
-    <div class="form_row">
-        <label>Privacy Settings</label>
-        <% Code.PRIVACY().each do |privacy| %>
-            <br/>
-            <%= f.radio_button :privacy, privacy %>
-                <%= label :privacy, privacy %>
-        <% end %>
-        <br/>
     </div>
 
 <% if not @code.live? %>

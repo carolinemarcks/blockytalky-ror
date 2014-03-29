@@ -1,1 +1,0 @@
-$("#sidebar > a").on("click",function(e){if(console.log("gettin clicked"),e.preventDefault(),!$(this).hasClass("active")){var i=$(this).closest("#sidebar").children(".active");i.removeClass("active"),i.next("div").collapse("hide"),$(this).addClass("active"),$(this).next("div").collapse("show")}});
