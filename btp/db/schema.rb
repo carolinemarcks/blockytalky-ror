@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20140328175116) do
     t.integer  "user_id"
     t.string   "title"
     t.string   "description"
+    t.string   "privacy"
   end
 
   add_index "codes", ["user_id", "created_at"], :name => "index_codes_on_user_id_and_created_at"
