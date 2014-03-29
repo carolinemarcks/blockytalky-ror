@@ -17,6 +17,15 @@ body
     float:left;
 }
 
+#profileTable{
+    width: 98%;
+    table-layout: fixed;
+}
+
+th.userInfo{
+    width: 35%;
+}
+
 #rightCodeRow, #rightBtuRow{
     border:none;
     float:right;
