@@ -13,4 +13,5 @@
  */
 #pageContent{
     overflow: auto;
+    overflow-x: hidden;
 }

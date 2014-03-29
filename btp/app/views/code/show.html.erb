@@ -9,7 +9,7 @@
 <%= render partial: "codeSavingButtons", locals:{user: @user}%>
 <br/>
 <% if @code.versions.count >= 1 %>
-    <div class="row"><div class="col-md-10 col-md-offset-2">
+    <div class="row"><div class="col-md-10">
         <% if not @code.version %>
             <a href=<%= code_path(@code.id, verison_id: @code.versions.last.index) %> type="button"
                 class="btn btn-inverse">Previous Saved Version</a>
