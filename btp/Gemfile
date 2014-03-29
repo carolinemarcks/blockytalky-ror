@@ -10,6 +10,7 @@ gem 'mysql2'
 gem 'devise'
 gem 'amistad'
 gem 'paper_trail'
+gem 'faye-websocket'
 
 # Testing gems
 group :test do

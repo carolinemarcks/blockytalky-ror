@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140308173000) do
+ActiveRecord::Schema.define(:version => 20140328175116) do
 
   create_table "btus", :force => true do |t|
     t.string   "btuID"
@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(:version => 20140308173000) do
   create_table "code_urls", :force => true do |t|
     t.string   "guid"
     t.integer  "code_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "code_version"
   end
 
   create_table "codes", :force => true do |t|

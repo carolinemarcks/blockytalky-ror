@@ -1,16 +1,8 @@
-class CodeController < ApplicationController
+class CodeController < BaseController
     before_filter :authenticate_user!, except: [:fromGuid]
     before_filter :can_read_code!, only: [:show, :version, :update, :uniqueId]
     before_filter :can_alter_code!, only: [:destroy]
-
-    def code_exists!
-        begin
-            @code = Code.find(params[:id])
-        rescue ActiveRecord::RecordNotFound
-            flash[:alert] = "This code does not exist"
-            redirect_to code_index_path
-        end
-    end
+    before_filter :code_versioning!, only: [:show, :uniqueId]
 
     def can_read_code!
         code_exists!
@@ -34,8 +26,21 @@ class CodeController < ApplicationController
         end
     end
 
+    def code_versioning!
+        if !params[:version_id].nil?
+            versioned = @code.versions[params[:version_id].to_i]
+            if !versioned.nil?
+                @code = versioned.reify
+            end
+        end
+    end
+
     def show
         @user = current_user
+        respond_to do |format|
+            format.html
+            format.json { render json: @code }
+        end
     end
 
     def new
@@ -91,36 +96,25 @@ class CodeController < ApplicationController
         redirect_to code_index_path
     end
 
-    def version
-        versioned = @code.versions[params[:version_id].to_i]
-        if not versioned
-            redirect_to @code
-        else
-            previous_version = versioned.reify
-            if previous_version
-                @code = previous_version
-                render "show"
-            else
-                redirect_to @code
-            end
-        end
-    end
-
     #Creates a one-time-use unique url for a block of code
     #TODO: move uniqueId and fromGuid to their own controller?
     def uniqueId
-        codeUrl = @code.code_urls.create
-        redirect_to fromGuid_code_index_url(codeUrl.guid)
+        codeUrl = @code.unique_url
+        redirect_to codeUrl.url(:html)
     end
 
     def fromGuid
         codeUrl = CodeUrl.find_by_guid(params[:guid])
-        if not codeUrl
-            render_404
-        else
-            @code = codeUrl.code
-            render "show"
-            codeUrl.destroy
+        respond_to do |format|
+            format.html {
+                if not codeUrl
+                    render_404
+                else
+                    @code = codeUrl.versioned_code
+                    render "show"
+                end
+            }
+            format.json { render json: codeUrl.versioned_code }
         end
     end
 

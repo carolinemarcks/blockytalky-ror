@@ -1,3 +1,5 @@
+require 'socket'
+
 Btp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -34,4 +36,14 @@ Btp::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  #Set the hostname to be the ip of the server
+  ip=Socket.ip_address_list.detect{|intf| intf.ipv4? and !intf.ipv4_private? and !intf.ipv4_loopback?}
+  if ip
+    ip_address = ip.ip_address
+  else
+    ip_address = "localhost"
+  end
+
+  Rails.application.routes.default_url_options[:host] = ip_address + ":3000"
 end

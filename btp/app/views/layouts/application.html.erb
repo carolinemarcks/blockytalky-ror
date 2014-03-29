@@ -8,7 +8,7 @@
     <%= javascript_include_tag params[:controller] %>
     <%= yield :head%>
 </head>
-<body>
+<body id="pageContent">
 <% if notice %>
     <div class="alert alert-info"><%= notice %></div>
 <% end %>

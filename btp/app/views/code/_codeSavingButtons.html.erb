@@ -9,12 +9,17 @@
                 </button>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1 col-md-offset-1">
                 <button data-target="#deployModal" class="btn btn-success"
                      data-toggle="modal">Run Code</button>
             </div>
 
-            <div class="col-md-2 col-md-offset-3">
+            <div class="col-md-2">
+                <button data-target="#stopModal" class="btn btn-warning"
+                     data-toggle="modal">Stop Code</button>
+            </div>
+
+            <div class="col-md-2 col-md-offset-1">
                 <button type="button" class="btn btn-danger"
                     onclick="clearCode()">Clear Blocks
                 </button>
@@ -29,7 +34,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="deployModalLabel">Select BTU for deployment</h3>
+                <h3 id="deployModalLabel">Select BTU for Deployment</h3>
             </div>
             <div class="modal-body">
                 <p>Choose your BTU:</p>
@@ -51,6 +56,39 @@
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                 <button class="btn btn-primary" onclick="deployCode()">Go!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="stopModal" class="modal fade" tabindex="-1" 
+    role="dialog" aria-labelledby="stopModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="stopModalLabel">Select BTU to Stop</h3>
+            </div>
+            <div class="modal-body">
+                <p>Choose your BTU:</p>
+                <% if current_user.btus.count >= 1 %>
+                    <select id="selectBTUStop"> 
+                    <% current_user.btus.each do |btu| %>
+                        <% if !btu.nil? %>
+                            <option data-btuId="<%= btu.id %>">
+                                <%= btu.title.blank? ? "(Unnamed BTU)" : btu.title %>
+                                <%= btu.btuID.blank? ? ": (No ID)" : ": " + truncate(btu.btuID, length: 40) %>
+                            </option>
+                        <% end %>
+                    <% end %>
+                    </select>
+                <% else %>
+        
+                <% end %>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-primary" onclick="stopCode()">Stop Code</button>
             </div>
         </div>
     </div>

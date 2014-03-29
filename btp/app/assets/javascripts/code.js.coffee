@@ -10,6 +10,21 @@
 @clearCode = ->
     Blockly.mainWorkspace.clear();
 
+@stopCode = ->
+    btuID = $('#selectBTUStop option:selected').attr('data-btuId');
+    buildUrl = "/btu/" + btuID + "/stop_code";
+    $.ajax
+        url: buildUrl,
+        type: "POST",
+        beforeSend: sendXhr,
+        success: ->
+            alert("success in telling controller to stop code");
+            return
+        failure: ->
+            alert("Something done got goofed when stopping code");
+            return
+    return;
+
 @deployCode = ->
     btuID = $('#selectBTU option:selected').attr('data-btuId');
     codeID = $('#selectBTU').attr('data-codeId');
@@ -17,6 +32,7 @@
     $.ajax
         url: buildUrl,
         type: "POST",
+        beforeSend: sendXhr,
         success: ->
             alert("great success");
             return
@@ -25,3 +41,6 @@
             return
     return;
 
+#Source: http://stackoverflow.com/questions/7203304/warning-cant-verify-csrf-token-authenticity-rails
+@sendXhr = (xhr) ->
+    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
