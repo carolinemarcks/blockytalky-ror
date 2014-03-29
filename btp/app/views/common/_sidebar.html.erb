@@ -7,6 +7,14 @@
         end
         return c
     end
+
+    def class_for_controller(controller)
+        c = "list-group-item"
+        if controller_name == controller
+            c += " active"
+        end
+        return c
+    end
 %>
 
 <div class="panel panel-default">
@@ -24,10 +32,10 @@
             
             <%= link_to "BTU Management",
                 btu_index_path,
-                :class=> class_for_path(btu_index_path) %>
+                :class=> class_for_controller("btu") %>
             <%= link_to "Code",
                 code_index_path,
-                :class=> class_for_path(code_index_path) %>
+                :class=> class_for_controller("code") %>
             <%= link_to 'Sign out', 
                 destroy_user_session_path, 
                 :method => :delete ,
