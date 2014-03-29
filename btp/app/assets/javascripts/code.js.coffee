@@ -16,6 +16,7 @@
     $.ajax
         url: buildUrl,
         type: "POST",
+        beforeSend: sendXhr,
         success: ->
             alert("success in telling controller to stop code");
             return
@@ -31,6 +32,7 @@
     $.ajax
         url: buildUrl,
         type: "POST",
+        beforeSend: sendXhr,
         success: ->
             alert("great success");
             return
@@ -39,3 +41,6 @@
             return
     return;
 
+#Source: http://stackoverflow.com/questions/7203304/warning-cant-verify-csrf-token-authenticity-rails
+@sendXhr = (xhr) ->
+    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
