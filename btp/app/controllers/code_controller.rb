@@ -105,17 +105,7 @@ class CodeController < BaseController
 
     def fromGuid
         codeUrl = CodeUrl.find_by_guid(params[:guid])
-        respond_to do |format|
-            format.html {
-                if not codeUrl
-                    render_404
-                else
-                    @code = codeUrl.versioned_code
-                    render "show"
-                end
-            }
-            format.json { render json: codeUrl.versioned_code }
-        end
+        render text: codeUrl.codetext
     end
 
     private
