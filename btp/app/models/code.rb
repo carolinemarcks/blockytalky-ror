@@ -28,6 +28,7 @@ class Code < ActiveRecord::Base
     validates :user_id, presence: true
     validates :title, presence: true
     validates :codetext, presence: true
+    validates_length_of :codetext, :maximum => 16.megabyte
     validates :privacy, presence: true
 
     def unique_url
