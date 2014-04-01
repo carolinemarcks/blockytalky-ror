@@ -56,16 +56,16 @@ codepage.start = function(opt_data, opt_ignored, opt_ijData) {
 '<table>'+
 '<tr>'+
 '<td style="padding:4px;">Port 1:'+
-'<input style="width:30%;" class="form-control pull-right" name="sensor1" id="sensorval1" size="3">'+
+'<input style="width:40%;" class="form-control pull-right" name="sensor1" id="sensorval1" size="3">'+
 '</td>'+
 '<td style="padding:4px;">Port 2:'+
-'<input style="width:30%;" class="form-control pull-right" name="sensor2" id="sensorval2" size="3">'+
+'<input style="width:40%;" class="form-control pull-right" name="sensor2" id="sensorval2" size="3">'+
 '</td>'+
 '<td style="padding:4px;">Port 3:'+
-'<input style="width:30%;" class="form-control pull-right" name="sensor3" id="sensorval3" size="3">'+
+'<input style="width:40%;" class="form-control pull-right" name="sensor3" id="sensorval3" size="3">'+
 '</td>'+
 '<td style="padding:4px;">Port 4:'+
-'<input style="width:30%;" class="form-control pull-right" name="sensor4" id="sensorval4" size="3">'+
+'<input style="width:40%;" class="form-control pull-right" name="sensor4" id="sensorval4" size="3">'+
 '</td>'+
 '</tr>'+
 '<tr>'+
