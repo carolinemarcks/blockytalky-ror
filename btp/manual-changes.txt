@@ -1,0 +1,13 @@
+automated changes:
+-run "sh static_corrector.sh" from the /blockytalky-ror/btp/vendor/static directory to change links pointing at 'static' to point at '/static'  
+
+manual changes:
+/blockytalky-ror/btp/vendor/static/en.js 
+-suggestion: use a macro to put whitespace between all the tags
+-add onload="renderBlocksOuter()" to the content_blocks iframe
+-remove td with help/delete/etc buttons (class="tabmax")  
+-hide entire tab row
+-remove <img src="/static/media/bt.png" id="btimg"> (blocky talky image)
+-remove td containing form with id="statusform"
+-major modifications to css of buttons/selects in order to give bootstrap feel
+
