@@ -28,7 +28,6 @@ apps.start = function(opt_data, opt_ignored, opt_ijData) {
 
 if (typeof codepage == 'undefined') { var codepage = {}; }
 
-//TODO MOVE CALLING OF renderBlocksOuter TO TEMPLATE FILE (if we can find it lol)
 
 codepage.start = function(opt_data, opt_ignored, opt_ijData) {
   return ''+
@@ -50,6 +49,8 @@ codepage.start = function(opt_data, opt_ignored, opt_ijData) {
 '<span id="discard">Delete all %1 blocks?'+
 '</span>'+
 '</div>'+
+'<br/>'+
+'<label>Port Info</label>'+
 '<table width="100%" height="100%">'+
 '<tr>'+
 '<td>'+
