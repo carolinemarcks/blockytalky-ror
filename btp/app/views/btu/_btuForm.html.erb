@@ -14,34 +14,21 @@
 <div class="col-md-10 ">
     <p>
         <label for="btuTitle">BTU Name</label><br/>
-        <% if @btu.title.blank? %>
-            <%= f.text_field :title, :id =>"btuTitle", :html => {:class =>"popover-input"},
-                                    rel: "popover", :placeholder => "Name Your Blocky Talky Unit", 
-                                    :data => {:content => "Look for your BTU's unique id in /etc/blocklyId!"}%>
-        <% else %>
-            <%= f.text_field :title, :id =>"btuTitle", :value => @btu.title %>
-        <% end %>
+        <%= f.text_field :title, :id =>"btuTitle",
+            :placeholder => "Name your Blocky Talky Unit",
+            :value => @btu.title %>
     </p>
 </div>
 
 <div class="col-md-10 ">
     <p>
         <label for="btuID">BTU ID</label><br/>
-        <% if @btu.btuID.blank? %>
-            <%= f.text_field :btuID, :id =>"btuID", :class =>"popover-input",
-                                    :rel => "popover", :placeholder => "BTU identifier #", 
-                                    :data => {:content => "Look for your BTU's unique id in /etc/blocklyId!",
-                                              :placement => "right",
-                                              :trigger   => "focus",
-                                              :container => "body"}%>
-        <% else %>
-            <%= f.text_field :btuID, :id =>"btuID", :class =>"popover-input",
-                                    :rel => "popover", :value => @btu.btuID, 
-                                    :data => {:content => "Look for your BTU's unique id in /etc/blocklyId!",
-                                              :placement => "right",
-                                              :trigger   => "focus",
-                                              :container => "body"}%>
-        <% end %>
+        <%= f.text_field :btuID, :id =>"btuID", :class =>"popover-input",
+            :rel => "popover", :placeholder => "BTU identifier #", :value => @btu.btuID,
+            :data => {:content => "Look for your BTU's unique id in /etc/blocklyId!",
+                      :placement => "right",
+                      :trigger   => "focus",
+                      :container => "body"}%>
     </p>
 </div>
 
