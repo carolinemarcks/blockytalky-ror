@@ -10,4 +10,5 @@ manual changes:
 -remove <img src="/static/media/bt.png" id="btimg"> (blocky talky image)
 -remove td containing form with id="statusform"
 -major modifications to css of buttons/selects in order to give bootstrap feel
+-moved all "style=<css>" into code.css.scss file
 

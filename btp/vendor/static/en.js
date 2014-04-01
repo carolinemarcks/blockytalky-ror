@@ -31,7 +31,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 codepage.start = function(opt_data, opt_ignored, opt_ijData) {
   return ''+
-'<div id="MSG" style="display: none">'+
+'<div id="MSG">'+
 '<span id="httpRequestError">There was a problem with the request.'+
 '</span>'+
 '<span id="linkAlert">Share your blocks with this link:\\n\\n%1'+
@@ -56,21 +56,21 @@ codepage.start = function(opt_data, opt_ignored, opt_ijData) {
 '<td>'+
 '<table>'+
 '<tr>'+
-'<td style="padding:4px;">Port 1:'+
-'<input style="width:40%;" class="form-control pull-right" name="sensor1" id="sensorval1" size="3">'+
+'<td class="portLabel">Port 1:'+
+'<input class="form-control pull-right portInput" name="sensor1" id="sensorval1" size="3">'+
 '</td>'+
-'<td style="padding:4px;">Port 2:'+
-'<input style="width:40%;" class="form-control pull-right" name="sensor2" id="sensorval2" size="3">'+
+'<td class="portLabel">Port 2:'+
+'<input class="form-control pull-right portInput" name="sensor2" id="sensorval2" size="3">'+
 '</td>'+
-'<td style="padding:4px;">Port 3:'+
-'<input style="width:40%;" class="form-control pull-right" name="sensor3" id="sensorval3" size="3">'+
+'<td class="portLabel">Port 3:'+
+'<input class="form-control pull-right portInput" name="sensor3" id="sensorval3" size="3">'+
 '</td>'+
-'<td style="padding:4px;">Port 4:'+
-'<input style="width:40%;" class="form-control pull-right" name="sensor4" id="sensorval4" size="3">'+
+'<td class="portLabel">Port 4:'+
+'<input class="form-control pull-right portInput" name="sensor4" id="sensorval4" size="3">'+
 '</td>'+
 '</tr>'+
 '<tr>'+
-'<td style="padding:6px;">'+
+'<td class="sensorOption">'+
 '<select class="form-control" id="sensor1" onchange="updateSensors()">'+
 '<option value="none">None'+
 '</option>'+
@@ -86,7 +86,7 @@ codepage.start = function(opt_data, opt_ignored, opt_ijData) {
 '</option>'+
 '</select>'+
 '</td>'+
-'<td style="padding:6px;">'+
+'<td class="sensorOption">'+
 '<select class="form-control" id="sensor2" onchange="updateSensors()">'+
 '<option value="none">None'+
 '</option>'+
@@ -102,7 +102,7 @@ codepage.start = function(opt_data, opt_ignored, opt_ijData) {
 '</option> '+
 '</select> '+
 '</td>'+
-'<td style="padding:6px;">'+
+'<td class="sensorOption">'+
 '<select class="form-control" id="sensor3" onchange="updateSensors()">'+
 '<option value="none">None'+
 '</option>'+
@@ -118,7 +118,7 @@ codepage.start = function(opt_data, opt_ignored, opt_ijData) {
 '</option>'+
 '</select> '+
 '</td>'+
-'<td style="padding:6px;"> '+
+'<td class="sensorOption">'+
 '<select class="form-control" id="sensor4" onchange="updateSensors()">'+
 '<option value="none">None'+
 '</option>'+
@@ -141,7 +141,7 @@ codepage.start = function(opt_data, opt_ignored, opt_ijData) {
 '<tr>'+
 '<td colspan=2>'+
 '<table>'+
-'<tr id="tabRow" style="display:none;" height="1em">'+
+'<tr id="tabRow" height="1em">'+
 '<td id="tab_blocks" class="tabon" onclick="tabClick(this.id)">Blocks'+
 '</td>'+
 '<td class="tabmin">&nbsp;'+
