@@ -2,9 +2,11 @@ class BaseController < ApplicationController
     def code_exists!
         begin
             @code = Code.find(params[:id])
+            return true
         rescue ActiveRecord::RecordNotFound
             flash[:alert] = "This code does not exist"
             redirect_to code_index_path
+            return false
         end
     end
 

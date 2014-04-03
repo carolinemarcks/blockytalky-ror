@@ -5,17 +5,18 @@ class CodeController < BaseController
     before_filter :code_versioning!, only: [:show, :uniqueId]
 
     def can_read_code!
-        code_exists!
-        if not @code.owned_by?(current_user) and not @code.public?
-            if not current_user.friends.include? @code.user
-                flash[:alert] = "You aren't friends with the owner of that code"
-                redirect_to code_index_path
-            end
-            if @code.private?
-                flash[:alert] = "This code is private"
-                redirect_to code_index_path
-            end
-       end
+        if code_exists!
+            if not @code.owned_by?(current_user) and not @code.public?
+                if not current_user.friends.include? @code.user
+                    flash[:alert] = "You aren't friends with the owner of that code"
+                    redirect_to code_index_path
+                end
+                if @code.private?
+                    flash[:alert] = "This code is private"
+                    redirect_to code_index_path
+                end
+           end
+        end
     end
 
     def can_alter_code!

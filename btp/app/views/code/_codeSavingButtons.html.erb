@@ -10,8 +10,11 @@
             </div>
 
             <div class="col-md-1 col-md-offset-1">
-                <button data-target="#deployModal" class="btn btn-success"
-                     data-toggle="modal">Run Code</button>
+                <button data-target="#deployModal" class="btn btn-success" 
+                    <% if !@code.id %>
+                        disabled="disabled"
+                    <% end %>
+                    data-toggle="modal">Run Code</button>
             </div>
 
             <div class="col-md-1 col-md-offset-1">
