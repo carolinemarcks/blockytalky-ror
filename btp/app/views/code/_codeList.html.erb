@@ -5,7 +5,7 @@
         <tr>
         <td>
             <div id="leftCodeRow">
-                <a href=<%= code_path(code.id) %>>
+                <a href=<%= code_path(code.id) %> class="programNames">
                     <%= code.title.blank? ? "(Unnamed Program)" : code.title %>
                 </a>
                 <p><i id="codeDescription">

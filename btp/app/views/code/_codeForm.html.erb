@@ -36,7 +36,9 @@
         <% Code.PRIVACY().each_with_index do |privacy, i| %>
             <div class="col-md-2">
             <% if(i == 0) %>
-                <label for="privacy">Privacy</label>
+                <label for="privacy"><u>Privacy</u>_</label>
+            <% else %>
+                <label for="privacy">________</label>
             <% end %>
             <br/>
             <%= f.radio_button :privacy, privacy %>
