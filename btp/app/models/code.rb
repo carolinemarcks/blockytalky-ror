@@ -2,6 +2,12 @@ class Code < ActiveRecord::Base
     # https://github.com/airblade/paper_trail
     has_paper_trail :on => [:update], :ignore => [:title]
 
+    #http://stackoverflow.com/questions/328525/how-can-i-set-default-values-in-activerecord
+    after_initialize :init
+    def init
+        self.privacy  ||= 'friends'
+    end
+
     def owned_by?(user)
         self.user_id == (user.try(:id) || user)
     end
