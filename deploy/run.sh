@@ -14,4 +14,4 @@ fi
 cd ~/blockytalky-ror/btp
 rails s -d
 cd ~/blockytalky/backend
-./router.py 2>> ~/dax.log &
+./router.py >> ~/dax.log 2>&1 &
