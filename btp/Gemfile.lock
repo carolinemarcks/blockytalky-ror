@@ -101,7 +101,6 @@ GEM
     paper_trail (3.0.1)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
-    pg (0.17.1)
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.4)
@@ -190,7 +189,6 @@ DEPENDENCIES
   jquery-rails
   mysql2
   paper_trail
-  pg
   railroady
   rails (= 3.2.13)
   rspec-rails

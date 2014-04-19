@@ -4,6 +4,8 @@ Rails site for blocky talky project
 
 The blockytalky code can be found on https://github.com/tufts-LPC/blockytalky
 
+The production site can be found at http://54.187.3.140
+
 #Installing
 
 If you're on Ubuntu, you'll need the ``libmysqlclient-dev``, ``mysql-server``,
