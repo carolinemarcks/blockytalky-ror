@@ -47,7 +47,7 @@ class Btu < ActiveRecord::Base
         data[:action] = action
         message = {"py/object" => "message.Message",
                    source: "Server",
-                   destination: self.title, #TODO: use the UUID
+                   destination: self.btuID,
                    channel: "Server",
                    content: data}
         if !(@@ws_is_initializing or @@ws)
@@ -74,7 +74,7 @@ class Btu < ActiveRecord::Base
         wb_thread = Thread.new do
             EM.run {
                 p "Making the websocket"
-                @@ws = Faye::WebSocket::Client.new('ws://localhost:8005/dax') #TODO: change to dax
+                @@ws = Faye::WebSocket::Client.new('ws://54.187.3.140:8005/dax') #TODO: change to dax
                 #@@ws = Faye::WebSocket::Client.new('ws://btrouter.getdown.org:8005/dax')
                 ws = @@ws
 
