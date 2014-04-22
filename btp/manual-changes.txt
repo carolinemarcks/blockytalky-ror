@@ -1,8 +1,9 @@
 automated changes:
--run "sh static_corrector.sh" from the /blockytalky-ror/btp/vendor/static directory to change links pointing at 'static' to point at '/static'  
+-run "sh static_corrector.sh" from the /blockytalky-ror/btp/other/static directory to change links pointing at 'static' to point at '/static'  
+-run "add_assets.sh" from the /blockytalky-ror/btp directory to compile and add all assets to the asset pipeline
 
 manual changes:
-/blockytalky-ror/btp/vendor/static/en.js 
+/blockytalky-ror/btp/other/static/en.js 
 -suggestion: use a macro to put whitespace between all the tags
 -add onload="renderBlocksOuter()" to the content_blocks iframe
 -remove td with help/delete/etc buttons (class="tabmax")  
