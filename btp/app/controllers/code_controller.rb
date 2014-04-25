@@ -106,7 +106,11 @@ class CodeController < BaseController
 
     def fromGuid
         codeUrl = CodeUrl.find_by_guid(params[:guid])
-        render text: codeUrl.codetext
+        if codeUrl
+            render text: codeUrl.codetext
+        else
+            render_404
+        end
     end
 
     private
