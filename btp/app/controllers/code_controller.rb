@@ -97,6 +97,10 @@ class CodeController < BaseController
         redirect_to code_index_path
     end
 
+    #def codeVersions
+        #render :json => @code.versions.map{ |v| v.reify }
+    #end
+
     #Creates a one-time-use unique url for a block of code
     #TODO: move uniqueId and fromGuid to their own controller?
     def uniqueId

@@ -13,12 +13,7 @@ Given /^I have created a piece of code with the title "(.*?)", description "(.*?
 end
 
 Then /^I should see the blockly editor$/ do
-    pending
-    if page.respond_to? :should
-        page.should have_css('div#BlocklyDiv')
-    else
-        page.has_selector?('div#BlocklyDiv') 
-    end
+     page.has_selector?('div#BlocklyDiv') 
 end
 
 Then /^I should see the title "(.*?)", description "(.*?)", and program "(.*?)"$/ do |arg1, arg2, arg3|
