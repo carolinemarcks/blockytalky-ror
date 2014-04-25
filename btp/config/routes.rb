@@ -27,8 +27,8 @@ Btp::Application.routes.draw do
         end
     end
 
-
-    get '/static/:name.:ext' => redirect {|params, request| "/assets/static/#{params[:name]}.#{params[:ext]}?#{request.query_string}" }, constraints: { name: /.+/, ext: /(js|html|png|css|mp3|cur)/ }
+    get '/static/:name.:ext' => redirect {|params, request| "/assets/static/#{params[:name]}.#{params[:ext]}?#{request.query_string}" }, constraints: { name: /.+/, ext: /(js|html|png|css|mp3|cur|gif)/ }
+    get '/media/:name.:ext' => redirect {|params, request| "/assets/static/media/#{params[:name]}.#{params[:ext]}?#{request.query_string}" }, constraints: { name: /.+/, ext: /(js|html|png|css|mp3|cur|gif)/ }
 
 
     root :to => redirect("/users/sign_in")
