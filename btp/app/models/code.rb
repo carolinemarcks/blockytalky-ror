@@ -28,6 +28,7 @@ class Code < ActiveRecord::Base
     end
 
     attr_accessible :codetext, :title, :description, :privacy
+    attr_accessible :sensor1, :sensor2, :sensor3, :sensor4
     belongs_to :user
 
     # Test for error - renders page weirdly but data isn't lost

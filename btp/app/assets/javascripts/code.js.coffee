@@ -4,6 +4,10 @@
 @exportCode = ->
     xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     xml_text = Blockly.Xml.domToText(xml);
+    $('sensorString1').html($('#sensor1 option:selected').text());
+    $('sensorString2').html($('#sensor2 option:selected').text());
+    $('sensorString3').html($('#sensor3 option:selected').text());
+    $('sensorString4').html($('#sensor4 option:selected').text());
     $('#xmlText').html(xml_text);
     $('#codeForm').submit();
 
