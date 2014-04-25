@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(:version => 20140423002656) do
 
   add_index "friendships", ["friendable_id", "friend_id"], :name => "index_friendships_on_friendable_id_and_friend_id", :unique => true
 
+  create_table "tasks", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tasks", ["user_id"], :name => "index_tasks_on_user_id"
+
   create_table "users", :force => true do |t|
     t.boolean  "isTeacher"
     t.string   "email"
