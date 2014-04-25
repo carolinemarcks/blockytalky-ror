@@ -25,9 +25,9 @@
         <div class="col-md-5 col-md-offset-1">
             <label for="codeDescription">Code Description </label>
             <% if @code.description.blank? %>
-              <%= f.text_area :description, :id =>"codeDescription", :class=> "form-control", :placeholder => "Description"%>
+              <%= f.text_area :description, :class=> "form-control", :placeholder => "Description"%>
             <% else %>
-              <%= f.text_area :description, :id =>"codeDescription", :class=> "form-control", :value => @code.description %>
+              <%= f.text_area :description, :class=> "form-control", :value => @code.description %>
             <% end %>
         </div>
     </div>

@@ -1,3 +1,4 @@
+@javascript
 Feature: Code CRUD
     In order to write code
     As a user of the code editor page

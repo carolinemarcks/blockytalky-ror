@@ -18,6 +18,7 @@ group :test do
     gem 'cucumber-rails'
     gem 'factory_girl_rails'
     gem 'capybara', '>=0.4.0'
+    gem 'selenium-webdriver'
     gem 'rspec-rails'
     gem 'sqlite3'
 end
