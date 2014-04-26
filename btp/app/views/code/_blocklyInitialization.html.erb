@@ -15,21 +15,32 @@
     
         $('#blocklyDiv').html(codepage.start({},null,
             {langSrc: BlocklyApps.LANGUAGES[BlocklyApps.LANG][2]}));
-
-        
+        initializeSensors();
         }
     function printblockly2(){
         var el = document.getElementById("content_blocks");
         el.contentWindow.printblockly()
-     
     }
+
+    function initializeSensors() {
+        function setSensor(sensorName, option) {
+            //If the option exists
+            if($("#" + sensorName + " option[value='" + option + "']").length > 0) {
+                $("#" + sensorName).val(option);
+            }
+        }
+        setSensor("sensor1", "<%= @code.sensor1 %>");
+        setSensor("sensor2", "<%= @code.sensor2 %>");
+        setSensor("sensor3", "<%= @code.sensor3 %>");
+        setSensor("sensor4", "<%= @code.sensor4 %>");
+    }
+
     function renderBlocksOuter(){
        <% if(@code.codetext) %>
             var code =  <%= ("'" + @code.codetext + "'").html_safe %> ;
             var el = document.getElementById("content_blocks");
             el.contentWindow.renderBlocksInner(code);
         <% end %>
-
 
     }
         

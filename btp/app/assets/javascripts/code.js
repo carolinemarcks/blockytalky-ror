@@ -2,10 +2,10 @@ this.exportCode = function() {
   var xml, xml_text;
   xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   xml_text = Blockly.Xml.domToText(xml);
-  $('#sensorString1').val($('#sensor1 option:selected').text());
-  $('#sensorString2').val($('#sensor2 option:selected').text());
-  $('#sensorString3').val($('#sensor3 option:selected').text());
-  $('#sensorString4').val($('#sensor4 option:selected').text());
+  $('#sensorString1').val($('#sensor1 option:selected').val());
+  $('#sensorString2').val($('#sensor2 option:selected').val());
+  $('#sensorString3').val($('#sensor3 option:selected').val());
+  $('#sensorString4').val($('#sensor4 option:selected').val());
   $('#xmlText').html(xml_text);
   return $('#codeForm').submit();
 };
