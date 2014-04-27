@@ -24,7 +24,11 @@ class Btu < ActiveRecord::Base
 
     def send_upload code
         url = code.unique_url.url(:json)
-        send_message(:upload_code, {url: url, updated_at: code.updated_at})
+        sensors = [code.sensor1.downcase,
+                   code.sensor2.downcase,
+                   code.sensor3.downcase,
+                   code.sensor4.downcase]
+        send_message(:upload_code, {url: url, sensors: sensors, updated_at: code.updated_at})
     end
 
     #We need to use this queue to fix a race condition where we try to send a
