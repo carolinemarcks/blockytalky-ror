@@ -15,3 +15,7 @@
     overflow: auto;
     overflow-x: hidden;
 }
+
+#body-container{
+    padding: 20px;
+}
