@@ -24,10 +24,15 @@
     </div>
 </div>
 <% if notice %>
-    <div class="alert alert-info"><%= notice %></div>
+    <div class="alert alert-info" id="noticeBox" ><%= notice %>
+        <button type="button" class="close" aria-hidden="true" onclick="$('#noticeBox').hide();">&times;</button>
+    </div>
+
 <% end %>
 <% if alert %>
-        <div class="alert alert-danger"><%= alert %></div>
+        <div class="alert alert-danger" id="alertBox"><%= alert %>
+            <button type="button" class="close" aria-hidden="true" onclick="$('#alertBox').hide();">&times;</button>
+        </div>
 <% end %>
 
 
