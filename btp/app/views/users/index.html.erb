@@ -33,7 +33,11 @@
           <% current_user.friends.each do |user| %>
               <tr>
                   <td><%= render partial: "potentialFriend", locals: {user: user} %></td> 
-                  <td><button type="button" class="btn btn-danger" onclick="">Revoke?</button>
+                  <td>
+                      <%= form_tag remove_friend_user_path(user.id) do %>
+                          <%= submit_tag "Revoke?", class: "btn btn-danger" %>
+                      <% end %>
+                  </td>
               </tr>
           <% end %>
         </table>
