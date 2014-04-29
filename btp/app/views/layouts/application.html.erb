@@ -9,15 +9,8 @@
     <%= yield :head%>
 </head>
 <body id="pageContent">
-<% if notice %>
-    <div class="alert alert-info"><%= notice %></div>
-<% end %>
-<% if alert %>
-        <div class="alert alert-danger"><%= alert %></div>
-<% end %>
-
 <div class="row">
-    <div class="col-md-5 col-md-offset-4">
+    <div class="col-md-5 col-md-offset-2">
         <img src="/assets/btlogotext.png"/>
     </div>
 </div>
@@ -30,5 +23,13 @@
     <%= yield %>
     </div>
 </div>
+<% if notice %>
+    <div class="alert alert-info"><%= notice %></div>
+<% end %>
+<% if alert %>
+        <div class="alert alert-danger"><%= alert %></div>
+<% end %>
+
+
 </body>
 </html>
