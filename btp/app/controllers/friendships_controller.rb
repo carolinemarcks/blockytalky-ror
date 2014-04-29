@@ -17,4 +17,10 @@ class FriendshipsController < ApplicationController
         current_user.approve @friend
         redirect_to :back
     end
+
+    def remove_friend
+        @friend = User.find(params[:id])
+        current_user.remove_friendship @friend
+        redirect_to :back
+    end
 end
