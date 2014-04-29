@@ -11,7 +11,7 @@
     </div>
 <% end %>
     <div class="row col-md-10">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <p>
                 <label for="title">Code Title</label><br/>
                 <% if @code.title.blank? %>
@@ -22,30 +22,21 @@
             </p>
         </div>
 
-        <div class="col-md-5 col-md-offset-1">
-            <label for="codeDescription">Code Description </label>
+        <div class="col-md-2">
+            <label for="privacy">Privacy</label>
+            <%= f.select( :privacy, Code.PRIVACY.map{|p| [p]},{}, {:class => "form-control privacySelect"}) %>
+        </div>
+    </div>
+
+    <div class="row col-md-10">
+        <div class="col-md-10">
+        <label for="codeDescription">Description</label>
             <% if @code.description.blank? %>
               <%= f.text_area :description, :class=> "form-control", :placeholder => "Description"%>
             <% else %>
               <%= f.text_area :description, :class=> "form-control", :value => @code.description %>
             <% end %>
         </div>
-    </div>
-
-    <div class="form_row row col-md-10">
-        <% Code.PRIVACY().each_with_index do |privacy, i| %>
-            <div class="col-md-2">
-            <% if(i == 0) %>
-                <label for="privacy"><u>Privacy</u>_</label>
-            <% else %>
-                <label for="privacy">________</label>
-            <% end %>
-            <br/>
-            <%= f.radio_button :privacy, privacy %>
-                <%= label :privacy, privacy, :class=>"privacyRadioLabel"  %>
-            </div>
-        <% end %>
-        <br/><br/>
     </div>
 
 <% if not @code.live? %>

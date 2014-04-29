@@ -16,7 +16,6 @@
             <p> Friends: <%= user.friends.count%> </p>
             <% if user == current_user %>
                 <p> <%= link_to "Update Profile", edit_user_registration_path %> </p>
-                <p> <%= link_to "Manage Friends", users_path %> </p>
             <% end %>
         </td>
     </tr>
