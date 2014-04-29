@@ -1,3 +1,6 @@
+# Straightforward controller meant to handle simple creation / deletion operations for a BTU ActiveRecord object. 
+# Most of the logic and code for deployment can be found in the BTU model.
+
 class BtuController < BaseController
     before_filter :authenticate_user!
     before_filter :btu_exists!, only: [:show, :update, :destroy]

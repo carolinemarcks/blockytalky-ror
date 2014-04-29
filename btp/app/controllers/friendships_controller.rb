@@ -1,3 +1,5 @@
+# Very simple controller with two operations: requesting and accepting friendships.  Most of the logic is encapsulated in the <b>amistad</b> gem, so this controller takes advantage of the user.invite and user.confirm functions.
+
 class FriendshipsController < ApplicationController
     before_filter :authenticate_user!
 

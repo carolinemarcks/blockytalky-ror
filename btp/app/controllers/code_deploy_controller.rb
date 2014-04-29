@@ -1,3 +1,5 @@
+# The code deploy controller acts as an intermediary between HTTP routes for stopping / uploading code and the code that actually performs said operations.
+
 require "uri"
 require "net/http"
 
