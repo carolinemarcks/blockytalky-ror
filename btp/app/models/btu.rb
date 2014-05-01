@@ -66,7 +66,6 @@ class Btu < ActiveRecord::Base
         else
             @@ws.send(message.to_json)
         end
-        p message #TODO: delete
     end
 
     def make_dax_websocket
@@ -78,8 +77,8 @@ class Btu < ActiveRecord::Base
         wb_thread = Thread.new do
             EM.run {
                 p "Making the websocket"
-                @@ws = Faye::WebSocket::Client.new('ws://54.187.3.140:8005/dax') #TODO: change to dax
-                #@@ws = Faye::WebSocket::Client.new('ws://btrouter.getdown.org:8005/dax')
+                #@@ws = Faye::WebSocket::Client.new('ws://54.187.3.140:8005/dax') #Our aws server
+                @@ws = Faye::WebSocket::Client.new('ws://btrouter.getdown.org:8005/dax')
                 ws = @@ws
 
                 ws.on :open do |event|
