@@ -23,10 +23,10 @@ this.stopCode = function() {
     type: "POST",
     beforeSend: sendXhr,
     success: function() {
-      alert("success in telling controller to stop code");
+        location.reload();
     },
     failure: function() {
-      alert("Something done got goofed when stopping code");
+        location.reload();
     }
   });
 };
@@ -41,10 +41,10 @@ this.deployCode = function() {
     type: "POST",
     beforeSend: sendXhr,
     success: function() {
-      alert("great success");
+        location.reload();
     },
     failure: function() {
-      alert("great failure");
+        location.reload();
     }
   });
 };

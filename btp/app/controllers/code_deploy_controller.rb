@@ -13,6 +13,7 @@ class CodeDeployController < BaseController
             code = Code.find(params[:code_id])
             @btu.send_upload code
             render text: "OK"
+            flash[:notice] = "Code sent to BTU!"
         rescue ActiveRecord::RecordNotFound
             render_404
         end
@@ -21,6 +22,7 @@ class CodeDeployController < BaseController
     def stop_code
         @btu.send_stop
         render text: "OK"
+        flash[:notice] = "Stop command sent to BTU"
     end
 
 end
