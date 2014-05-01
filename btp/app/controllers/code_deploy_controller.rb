@@ -9,6 +9,7 @@ class CodeDeployController < BaseController
 
     def upload_code
         begin
+            # TODO take into account versions
             code = Code.find(params[:code_id])
             @btu.send_upload code
             render text: "OK"
