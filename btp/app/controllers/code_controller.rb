@@ -90,9 +90,6 @@ class CodeController < BaseController
     def destroy
         @user = current_user
         @user.codes.delete_if{|o| o.id == params[:id]}
-        @code.versions.each do |v|
-            v.destroy
-        end
         @code.destroy
         redirect_to code_index_path
     end

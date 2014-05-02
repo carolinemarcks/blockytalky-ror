@@ -4,12 +4,19 @@ class Code < ActiveRecord::Base
 
     #http://stackoverflow.com/questions/328525/how-can-i-set-default-values-in-activerecord
     after_initialize :init
+    before_destroy :delete_versions
     def init
         self.privacy  ||= 'friends'
     end
 
     def owned_by?(user)
         self.user_id == (user.try(:id) || user)
+    end
+
+    def delete_versions
+        self.versions.each do |v|
+            v.destroy
+        end
     end
 
     # http://stackoverflow.com/questions/9590904/ruby-on-rails-activerecord-how-should-i-store-a-state-of-the-object

@@ -34,7 +34,7 @@ Feature: Code CRUD
 
     Scenario Outline: Modify a piece of code
         Given I am a new, authenticated user
-        And have created a piece of code with the title "<title>", description "<description>", and program "<program>"
+        And I have created a piece of code with the title "<title>", description "<description>", and program "<program>"
         When I change the title of the code to "<newtitle>"
         And I change the description of the code to "<newdescription>"
         And I change the program to "<newprogram>"

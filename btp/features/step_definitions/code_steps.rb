@@ -19,12 +19,12 @@ end
 
 When /^I change the (title|description|program) of the code to "(.*?)"$/ do |attribute, newcontent|
     case attribute
-    when title
+    when 'title'
         @code.title = newcontent
-    when description
+    when 'description'
         @code.description = newcontent
-    when program
-        @code.program = newcontent
+    when 'program'
+        @code.program = @program[newcontent]
     end
 end
 
@@ -35,15 +35,13 @@ end
 
 When /^I delete the code with the title "(.*?)"$/ do |arg1|
     pending # express the regexp above with the code you wish you had
-    @code.
-    destroy
-        @user = current_user
-        @user.codes.delete_if{|o| o.id == params[:id]}
-        @code.versions.each do |v|
-            v.destroy
-        end
-        @code.destroy
-        redirect_to code_index_path
+    @code.versions.each do |v|
+        v.destroy
+    end
+    @code.destroy
+end
 
+When(/^I change the program to "(.*?)"$/) do |arg1|
+    pending # express the regexp above with the code you wish you had
 end
 
