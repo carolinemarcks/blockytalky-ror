@@ -1,3 +1,6 @@
+# This controller handles the updating, creation, and deletion of code objects.  The controller has a few helper functions to check the permissions of the current user, but again is pretty straight forward.  
+# Since code is versioned using the paper_trail gem, methods that update / delete code also must take care to update the versions of the code as well.
+
 class CodeController < BaseController
     before_filter :authenticate_user!, except: [:fromGuid]
     before_filter :can_read_code!, only: [:show, :version, :update, :uniqueId]

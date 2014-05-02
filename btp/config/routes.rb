@@ -24,6 +24,7 @@ Btp::Application.routes.draw do
         member do
             post 'request_friend', controller: 'friendships'
             post 'approve_friend', controller: 'friendships'
+            post 'remove_friend', controller: 'friendships'
         end
     end
 

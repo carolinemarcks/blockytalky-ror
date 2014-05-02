@@ -9,15 +9,8 @@
     <%= yield :head%>
 </head>
 <body id="pageContent">
-<% if notice %>
-    <div class="alert alert-info"><%= notice %></div>
-<% end %>
-<% if alert %>
-        <div class="alert alert-danger"><%= alert %></div>
-<% end %>
-
 <div class="row">
-    <div class="col-md-5 col-md-offset-4">
+    <div class="col-md-5 col-md-offset-2">
         <img src="/assets/btlogotext.png"/>
     </div>
 </div>
@@ -26,9 +19,22 @@
         <br/><br/><br/><br/>
         <%= render 'common/sidebar' %>
     </div>
-    <div class="col-md-offset-2">
+    <div class="col-md-offset-2" id="body-container">
     <%= yield %>
     </div>
 </div>
+<% if notice %>
+    <div class="alert alert-info" id="noticeBox" ><%= notice %>
+        <button type="button" class="close" aria-hidden="true" onclick="$('#noticeBox').hide();">&times;</button>
+    </div>
+
+<% end %>
+<% if alert %>
+        <div class="alert alert-danger" id="alertBox"><%= alert %>
+            <button type="button" class="close" aria-hidden="true" onclick="$('#alertBox').hide();">&times;</button>
+        </div>
+<% end %>
+
+
 </body>
 </html>

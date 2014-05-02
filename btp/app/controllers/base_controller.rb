@@ -1,3 +1,6 @@
+# This controller that manages ownership and existence of code and BTUs.  Code and BTU related
+# controllers inherit from this one and all shared functions are written here  
+
 class BaseController < ApplicationController
     def code_exists!
         begin
